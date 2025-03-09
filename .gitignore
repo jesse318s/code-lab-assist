@@ -1,0 +1,7 @@
+java-lab/bin/
+java-lab/lib/
+
+__pycache__/
+
+*.exe
+*.o
