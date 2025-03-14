@@ -9,24 +9,20 @@
 ### Formatting
 
 - If if statements can be a single line, make them so and don't use brackets
-- Use space after variable declarations
-- If/if else/if elseif statements, and loops should always have 1 line of space after them
+- Use a line of space after variable declarations
+- If/if else/if elseif statements, and loops should always have a line of space after them
 
 ### Code Generation
 
 - Always use the Lab Template to generate new labs in chat
-- When generatings solutions for Lab Template problems, always use the cplusplus-lab and c-lab directories appropriately (including creating header files for imports)
-- When generatings solutions for Lab Template problems, avoid modifying or adding Makefiles
-- When generating solutions for Lab Template problems, use unittest for Python tests, JUnit 5 for Java tests, no framework for JavaScript tests (DO NOT USE JEST OR NODE UNLESS SPECIFIED. ALWAYS USE THE BUILT-IN JAVASCRIPT MODULE SCRIPTS AND ALWAYS USE APPROPRIATE IMPORT STATEMENTS AND EXPORTS INSTEAD OF REQUIRE AND MODULE.EXPORTS), no framework for C tests, and no framework for C++ tests
-- Start with pseudocode explanation
+- When generating solutions for Lab Template problems, always use the cplusplus-lab and c-lab directories appropriately (including creating header files for imports)
+- When generating solutions for Lab Template problems, avoid modifying or adding Makefiles
+- When generating solutions for Lab Template problems, use unittest for Python tests, JUnit 5 for Java tests, no framework for JavaScript tests (do not use Jest or Node unless specified. Always use the built-in javascript module scripts, and always use appropriate import statements and exports instead of require and module.exports), no framework for C tests, and no framework for C++ tests
+- Start with pseudocode explanations in chat
 - Document function parameters
 - Include error handling
 - Add unit tests where applicable
 - Show example usage
-
-### Specific Instructions:
-
-### Student Requests:
 
 ## Lab Template
 
@@ -40,7 +36,7 @@
 
 ### Name:
 
-{name_for_lab_code} (match for lab language and code type)
+{name_for_lab_code} (matches lab language and code type)
 
 ### Description:
 
