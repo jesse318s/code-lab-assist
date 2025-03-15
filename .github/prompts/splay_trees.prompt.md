@@ -1,4 +1,4 @@
-Create a Lab over Splay Trees.
+Create a solved Lab over Splay Trees.
 
 ## Language:
 
