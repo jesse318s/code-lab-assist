@@ -15,6 +15,7 @@ A powerful academic programming tool that generates structured lab problems and 
 
 - Python 3.6+
 - Jupyter notebook and Python language support
+- The necessary Python libraries
 - Language-specific compilers/interpreters for testing
 
 ### Usage
