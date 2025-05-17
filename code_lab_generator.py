@@ -21,6 +21,11 @@ class CodeLabGenerator:
                 'function': self._get_javascript_function_template,
                 'class': self._get_javascript_class_template,
             },
+            'TypeScript': {
+                'function': self._get_typescript_function_template,
+                'class': self._get_typescript_class_template,
+                'interface': self._get_typescript_interface_template,
+            },
             'C': {
                 'function': self._get_c_function_template,
             },
@@ -81,9 +86,8 @@ class {name}:
  * {desc}
  */
 public class Solution_{name} {{
-    public static int solve({params}) {{
+    public static void solve({params}) {{
         {solution}
-        return 0;
     }}
 }}
 '''
@@ -145,6 +149,47 @@ class {name} {{
     solve() {{
         {solution}
     }}
+}}
+'''
+    
+    def _get_typescript_function_template(self, name: str, params: str, desc: str) -> str:
+        solution = '// TODO: Implement solution'
+
+        return f'''
+/**
+    * {desc}
+    */
+function solve_{name}({params}): void {{
+    {solution}
+}}
+'''
+    
+    def _get_typescript_class_template(self, name: str, params: str, desc: str) -> str:
+        solution = '// TODO: Implement solution'
+        init_params = params if params else ''
+
+        return f'''
+/**
+    * {desc}
+    */
+class {name} {{
+    constructor({init_params}) {{
+        {solution}
+    }}
+    
+    solve(): void {{
+        {solution}
+    }}
+}}
+'''
+    
+    def _get_typescript_interface_template(self, name: str, params: str, desc: str) -> str:
+        return f'''
+/**
+    * {desc}
+    */
+interface {name} {{
+    solve({params}): void;
 }}
 '''
 

@@ -4,9 +4,9 @@ A powerful academic programming tool that generates structured lab problems and 
 
 ## Features
 
-- **Multi-Language Support**: Generate code templates for Python, JavaScript, Java, C, C++, and C#
+- **Multi-Language Support**: Generate code templates for Python, JavaScript, TypeScript, Java, C, C++, and C#
 - **Versatile Code Templates**: Generate functions, classes, and interfaces with appropriate language-specific syntax
-- **Automated Testing**: Generate comprehensive tests for any created lab
+- **Automated Testing**: Generate comprehensive test suites for all supported languages, except C# which is designed for a Visual Studio project environment for proper test execution
 - **User-Friendly Interface**: Interactive Jupyter notebook interface for easy lab creation
 
 ## Getting Started

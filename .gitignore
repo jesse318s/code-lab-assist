@@ -5,3 +5,6 @@ __pycache__/
 
 *.exe
 *.o
+
+typescript-lab/node_modules/
+typescript-lab/dist/
