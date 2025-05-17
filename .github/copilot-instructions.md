@@ -15,9 +15,18 @@
 ### Code Generation
 
 - Always use the Lab Template to generate new labs in chat
-- When generating solutions for Lab Template problems, always use the cplusplus-lab and c-lab directories appropriately (including creating header files for imports)
-- When generating solutions for Lab Template problems, avoid modifying or adding Makefiles
-- When generating solutions for Lab Template problems, use unittest for Python tests, JUnit 5 for Java tests, no framework for JavaScript tests (do not use Jest or Node unless specified. Always use the built-in javascript module scripts, and always use appropriate import statements and exports instead of require and module.exports), no framework for C tests, and no framework for C++ tests
+- When generating solutions for Lab Template problems:
+  - Always use the cplusplus-lab and c-lab directories appropriately (including creating header files for imports)
+  - Avoid modifying or adding Makefiles
+  - Use the following testing frameworks:
+    - unittest for Python tests
+    - JUnit 5 for Java tests
+    - No framework for JavaScript tests (do not use Jest or Node unless specified;
+      always use the built-in JavaScript module scripts,
+      and always use appropriate import statements and exports instead of require and module.exports)
+    - Jest for TypeScript tests
+    - No framework for C tests
+    - No framework for C++ tests
 - Start with pseudocode explanations in chat
 - Document function parameters
 - Include error handling
@@ -48,7 +57,9 @@
 
 (never use bullet points or numbered lists when listing the parameters)
 
-{parameter_names_and_types} (comma seperated name and type combos. Only list the parameters for the generated function, class constructor, or interface method)
+{parameter_names_and_types}
+(comma separated name and type combos. Only list the parameters for the generated function, class constructor,
+or interface method)
 
 ## Roles
 
