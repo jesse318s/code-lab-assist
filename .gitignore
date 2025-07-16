@@ -8,3 +8,6 @@ __pycache__/
 
 typescript-lab/node_modules/
 typescript-lab/dist/
+
+csharp-lab/*/bin/
+csharp-lab/*/obj/

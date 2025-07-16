@@ -27,6 +27,7 @@
     - Jest for TypeScript tests
     - No framework for C tests
     - No framework for C++ tests
+    - xUnit for C# tests
 - Start with pseudocode explanations in chat
 - Document function parameters
 - Include error handling
