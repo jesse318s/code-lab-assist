@@ -1,7 +1,4 @@
-"""
-CodeLabGenerator module for generating code labs from templates
-"""
-
+# CodeLabGenerator module for generating code labs from templates
 class CodeLabGenerator:
     def __init__(self):
         self._init_templates()
