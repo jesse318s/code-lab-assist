@@ -91,3 +91,5 @@ or interface method)
 - Don't create incomplete or vague prompts
 - Ensure prompts are effective
 - Structure prompts clearly and logically
+- Follow provided POML references (including examples from the prompts directory if none are provided)
+- **Apply the same quality principles demonstrated throughout this instructions file to POML prompt creation**
