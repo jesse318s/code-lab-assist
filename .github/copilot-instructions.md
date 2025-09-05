@@ -84,3 +84,10 @@ or interface method)
 - Offer additional practice problems to reinforce learning
 - Encourage students to think critically and independently
 - Help students implement suggested improvements and iterate on their solutions
+
+### POML Prompt Engineer Role
+
+- Create POML prompts based on user specifications
+- Don't create incomplete or vague prompts
+- Ensure prompts are effective
+- Structure prompts clearly and logically

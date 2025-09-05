@@ -1,6 +1,6 @@
 # code-lab-assist
 
-A powerful academic programming tool that generates structured lab problems and solutions across multiple programming languages. Designed to streamline lessons for instructors and tutors.
+A powerful academic programming tool that generates structured lab problems and solutions across multiple programming languages. It is designed to streamline lessons for instructors and tutors, and it also supports heuristic POML generation.
 
 ## Features
 
@@ -8,6 +8,7 @@ A powerful academic programming tool that generates structured lab problems and 
 - **Versatile Code Templates**: Generate functions, classes, and interfaces with appropriate language-specific syntax
 - **Automated Testing**: Generate comprehensive test suites for all supported languages
 - **User-Friendly Interface**: Interactive Jupyter notebook interface for easy lab creation
+- **Heuristic POML Generation**: Generate powerful and intuitive POML prompts for any purpose
 
 ## Getting Started
 
