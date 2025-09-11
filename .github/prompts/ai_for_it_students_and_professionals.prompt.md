@@ -1,3 +1,8 @@
+---
+description: "Create a basic AI workshop."
+mode: "agent"
+---
+
 # Please create an extremely basic workshop from this project material over AI for IT Students and Professionals (Beginner - 45 minutes):
 
 index.html
@@ -28,7 +33,7 @@ index.html
 </html>
 ```
 
-ml-classiication-lab.js
+ml-classication-lab.js
 
 ```javascript
 export class KNearestNeighbors {
@@ -121,15 +126,15 @@ SimpleLinearRegression.js
 
 ```javascript
 export class SimpleLinearRegression {
-constructor() {
-this.slope = 0;
-this.intercept = 0;
-}
+  constructor() {
+    this.slope = 0;
+    this.intercept = 0;
+  }
 
-train(x, y) {
-const n = x.length;
-const xMean = x.reduce((a, b) => a + b) / n;
-const yMean = y.reduce((a, b) => a + b) / n;
+  train(x, y) {
+    const n = x.length;
+    const xMean = x.reduce((a, b) => a + b) / n;
+    const yMean = y.reduce((a, b) => a + b) / n;
 
     let numerator = 0;
     let denominator = 0;
@@ -141,11 +146,10 @@ const yMean = y.reduce((a, b) => a + b) / n;
 
     this.slope = numerator / denominator;
     this.intercept = yMean - this.slope * xMean;
+  }
 
-}
-
-predict(x) {
-return this.slope \* x + this.intercept;
-}
+  predict(x) {
+    return this.slope * x + this.intercept;
+  }
 }
 ```
