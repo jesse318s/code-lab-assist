@@ -21,10 +21,11 @@ A powerful academic programming tool that generates structured lab problems and 
 
 ### Usage
 
-1. Launch the Jupyter notebook interface. (code_lab_ui.ipynb)
+1. Launch the Jupyter notebook interface (code_lab_ui.ipynb)
 2. Use the interactive form to specify:
    - Programming language
    - Code type (function, class, or interface)
-   - Name and parameters
+   - Name
    - Problem description
+   - Parameters
 3. Click "Generate" to create your lab

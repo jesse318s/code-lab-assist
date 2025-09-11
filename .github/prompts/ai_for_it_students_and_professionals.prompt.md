@@ -1,5 +1,5 @@
 ---
-description: "Create a basic AI workshop."
+description: "Create a basic AI workshop"
 mode: "agent"
 ---
 

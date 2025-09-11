@@ -1,6 +1,6 @@
 # AI Agent Role Definitions
 
-This document defines the project specific roles for AI agents.
+This document defines the project-specific roles for AI agents
 
 ## Roles
 

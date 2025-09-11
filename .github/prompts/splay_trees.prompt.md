@@ -1,9 +1,9 @@
 ---
-description: "Create a Splay Tree lab."
+description: "Create a Splay Tree lab"
 mode: "agent"
 ---
 
-Create a solved Lab over Splay Trees.
+Create a solved Lab over Splay Trees
 
 ## Language:
 
