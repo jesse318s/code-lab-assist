@@ -10,7 +10,8 @@
 
 - If if statements can be a single line, make them so and don't use brackets
 - Use a line of space after variable declarations
-- If/if else/if elseif statements, and loops should always have a line of space after them (unless the nesting/indentation decreases on the next line)
+- If/if else/if elseif statements, and loops should always have a line of space after them (unless the nesting/indentation
+  decreases on the next line)
 
 ### Lab Code Generation
 
