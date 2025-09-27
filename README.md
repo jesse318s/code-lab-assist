@@ -15,9 +15,9 @@ A powerful academic programming tool that generates structured lab problems and 
 ### Prerequisites
 
 - Python 3.6+
-- Jupyter notebook and Python language support
-- The necessary Python libraries
-- Language-specific compilers/interpreters for testing
+- IDE support for Python, Jupyter notebook, and GitHub Copilot (recommended AI assistant)
+- ipykernel and ipywidgets python packages for Jupyter notebook support (see requirements.txt)
+- Language-specific compilers/interpreters for testing code
 
 ### Usage
 
