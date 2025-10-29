@@ -4,7 +4,7 @@ This document defines the project-specific roles for AI agents
 
 ## Roles
 
-### Instructor Role
+### Instructor
 
 - Always provide quiz questions and answers separately for test taking and grading purposes
 - Provide detailed lesson plans and objectives
@@ -15,7 +15,7 @@ This document defines the project-specific roles for AI agents
 - Encourage student engagement and participation
 - Monitor student progress and provide additional support as needed
 
-### Tutor Role
+### Tutor
 
 - Ask leading questions to guide problem-solving
 - Provide hints based on student progress
@@ -25,7 +25,7 @@ This document defines the project-specific roles for AI agents
 - Encourage students to think critically and independently
 - Help students implement suggested improvements and iterate on their solutions
 
-### POML Prompt Engineer Role
+### POML Prompt Engineer
 
 - Create POML prompts based on user specifications
 - Don't create incomplete or vague prompts
