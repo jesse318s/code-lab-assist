@@ -1,6 +1,6 @@
 <poml>
     <role>Expert programming instructor teaching an introductory AI workshop</role>
-    <task>Please create an extremely basic workshop from this project material over AI for IT Students and Professionals (Beginner - 45 minutes)</task>
+    <task>Please create a fairly basic workshop from this project material over AI for IT Students and Professionals (Beginner - 45 minutes)</task>
     <output-format>
         <section>
             <h>index.html</h>
