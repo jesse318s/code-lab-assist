@@ -1,6 +1,5 @@
 ---
 description: "Create a Binary Search Tree lab"
-mode: "agent"
 ---
 
 Create a solved Lab over Binary Search Trees
