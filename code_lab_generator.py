@@ -46,6 +46,9 @@ class CodeLabGenerator:
         template_method = self.templates[lang][template_type]
 
         return template_method(name, params, desc)
+    
+    def list_templates(self) -> dict:
+        return {lang: list(types.keys()) for lang, types in self.templates.items()}
 
     def _get_python_function_template(self, name: str, params: str, desc: str) -> str:
         solution = '# TODO: Implement solution'
@@ -57,7 +60,7 @@ def solve_{name}({params}):
     """
     {solution}
 '''
-    
+
     def _get_python_class_template(self, name: str, params: str, desc: str) -> str:
         solution = '# TODO: Implement solution'
         init_params = f'({params})' if params else '()'
@@ -148,7 +151,7 @@ class {name} {{
     }}
 }}
 '''
-    
+
     def _get_typescript_function_template(self, name: str, params: str, desc: str) -> str:
         solution = '// TODO: Implement solution'
 
@@ -160,7 +163,7 @@ function solve_{name}({params}): void {{
     {solution}
 }}
 '''
-    
+
     def _get_typescript_class_template(self, name: str, params: str, desc: str) -> str:
         solution = '// TODO: Implement solution'
         init_params = params if params else ''
@@ -179,7 +182,7 @@ class {name} {{
     }}
 }}
 '''
-    
+
     def _get_typescript_interface_template(self, name: str, params: str, desc: str) -> str:
         return f'''
 /**
@@ -250,7 +253,7 @@ void solve_{name}({params}) {{
     def _get_cpp_class_template(self, name: str, params: str, desc: str) -> str:
         solution = '// TODO: Implement solution'
         init_params = params if params else ''
-        
+
         return f'''
 /**
  * {desc}
