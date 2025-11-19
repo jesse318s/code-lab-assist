@@ -46,7 +46,7 @@ class CodeLabGenerator:
         template_method = self.templates[lang][template_type]
 
         return template_method(name, params, desc)
-    
+
     def list_templates(self) -> dict:
         return {lang: list(types.keys()) for lang, types in self.templates.items()}
 
