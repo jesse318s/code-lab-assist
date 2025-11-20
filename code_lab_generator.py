@@ -36,14 +36,14 @@ class CodeLabGenerator:
             }
         }
 
-    def generate_code(self, lang: str, name: str, params: str, desc: str, template_type='function') -> str:
+    def generate_code(self, lang: str, name: str, params: str, desc: str, tem_type: str) -> str:
         if lang not in self.templates:
-            raise ValueError(f"Unsupported language: {lang}. Supported languages: {list(self.templates.keys())}")
+            raise ValueError(f"Unsupported lang: {lang}. Supported: {list(self.templates.keys())}")
 
-        if template_type not in self.templates[lang]:
-            raise ValueError(f"Unsupported template type: {template_type}. Supported template types for {lang}: {list(self.templates[lang].keys())}")
+        if tem_type not in self.templates[lang]:
+            raise ValueError(f"Unsupported template type: {tem_type} for lang: {lang}.")
 
-        template_method = self.templates[lang][template_type]
+        template_method = self.templates[lang][tem_type]
 
         return template_method(name, params, desc)
 
