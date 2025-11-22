@@ -1,19 +1,13 @@
-## General Guidelines:
+# Rules
 
-- Include comments explaining complex logic
-- Use clear, descriptive variable names
-- Break down solutions into manageable functions
-
-## Rules:
-
-### Formatting
+## Formatting:
 
 - If if statements can be a single line, make them so and don't use brackets
 - Use a line of space after variable declarations
 - If/if else/if elseif statements, and loops should always have a line of space after them (unless the nesting/indentation
   decreases on the next line)
 
-### Lab Code Generation
+## Lab Code Generation:
 
 - Always use the Lab Template to generate new labs in chat
 - When generating solutions for Lab Template problems:
@@ -35,27 +29,27 @@
 - Add unit tests where applicable
 - Show example usage
 
-## Lab Template
+# Lab Template
 
-### Language:
+## Language:
 
 {lab_language}
 
-### Type (function, class, or interface):
+## Type (function, class, or interface):
 
 {code_type} (lowercase function, class, or interface)
 
-### Name:
+## Name:
 
 {name_for_lab_code} (matches lab language and code type)
 
-### Description:
+## Description:
 
 (never use bulletpoints or numbered lists in the description)
 
 {problem_instructions}
 
-### Parameters:
+## Parameters:
 
 (never use bullet points or numbered lists when listing the parameters)
 
