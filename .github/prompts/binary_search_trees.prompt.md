@@ -1,5 +1,5 @@
 ---
-description: "Create a Binary Search Tree lab"
+description: Create a Binary Search Tree lab
 ---
 
 Create a solved Lab over Binary Search Trees

@@ -1,5 +1,5 @@
 ---
-description: "Create a Splay Tree lab"
+description: Create a Splay Tree lab
 ---
 
 Create a solved Lab over Splay Trees
