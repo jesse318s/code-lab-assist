@@ -1,13 +1,14 @@
+__pycache__/
+
+package-lock.json
+node_modules/
+typescript-lab/dist/
+
 java-lab/bin/
 java-lab/lib/
 
-__pycache__/
+csharp-lab/*/bin/
+csharp-lab/*/obj/
 
 *.exe
 *.o
-
-typescript-lab/node_modules/
-typescript-lab/dist/
-
-csharp-lab/*/bin/
-csharp-lab/*/obj/
