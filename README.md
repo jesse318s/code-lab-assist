@@ -15,7 +15,7 @@ A powerful academic programming tool that generates structured lab problems and 
 ### Prerequisites
 
 - Python 3.6+
-- IDE support for Python, Jupyter notebooks, and GitHub Copilot (Copilot is the recommended AI assistant)
+- IDE support for Python, Jupyter notebooks, and GitHub Copilot (or an OpenCode installation instead of GitHub Copilot)
 - _ipykernel_ and _ipywidgets_ python packages for Jupyter notebook execution (see requirements.txt)
 - Language-specific compilers/interpreters for testing code
 - POML renderer for proper usage of POML prompts (e.g, the POML extension for VS Code)

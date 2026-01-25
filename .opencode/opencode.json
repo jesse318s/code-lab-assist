@@ -1,9 +1,10 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "theme": "matrix",
+  "theme": "github",
   "keybinds": {
     "command_list": "ctrl+o"
   },
+  "instructions": [".github/copilot-instructions.md"],
   "permission": {
     "*": "ask"
   },
