@@ -63,7 +63,7 @@ def solve_{name}({params}):
 
     def _get_python_class_template(self, name: str, params: str, desc: str) -> str:
         solution = '# TODO: Implement solution'
-        init_params = f'({params})' if params else '()'
+        init_params = f'(self, {params})' if params else '(self)'
 
         return f'''
 class {name}:
