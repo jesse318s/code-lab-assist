@@ -12,3 +12,6 @@ csharp-lab/*/obj/
 
 *.exe
 *.o
+
+prompt.poml
+prompt_context.json
