@@ -1,7 +1,6 @@
 {
   "java.project.sourcePaths": ["java-lab/src"],
   "java.project.outputPath": "java-lab/bin",
-  "java.project.referencedLibraries": ["java-lab/lib/**/*.jar"],
   "python.testing.unittestArgs": [
     "-v",
     "-s",

@@ -15,7 +15,7 @@
   - Avoid modifying or adding Makefiles
   - Use the following testing frameworks:
     - unittest for Python tests
-    - JUnit 5 for Java tests
+    - No framework for Java tests (do not use JUnit unless specified)
     - No framework for JavaScript tests (do not use Jest or Node unless specified;
       always use the built-in JavaScript module scripts,
       and always use appropriate import statements and exports instead of require and module.exports)

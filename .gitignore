@@ -5,7 +5,6 @@ node_modules/
 typescript-lab/dist/
 
 java-lab/bin/
-java-lab/lib/
 
 *.sln
 csharp-lab/*/bin/
