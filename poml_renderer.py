@@ -1,7 +1,7 @@
 """
 Clean POML Renderer Script
 
-Renders POML templates with context variables and outputs the result.
+Renders POML prompts with context variables and outputs the result.
 """
 
 import poml
@@ -23,10 +23,10 @@ def load_context(context_file):
         return {}
 
 
-def render_poml(template_file, context):
-    """Render POML template with given context."""
+def render_poml(prompt_file, context):
+    """Render POML prompt with given context."""
     try:
-        messages = poml.poml(template_file, context=context)
+        messages = poml.poml(prompt_file, context=context)
         return "\n".join([msg['content'] for msg in messages])
     except Exception as e:
         print(f"Error rendering POML: {e}")
@@ -51,7 +51,7 @@ def save_output(rendered_content, output_file=None):
 def main():
     """Main function."""
     # Default values
-    template_file = "prompt.poml"
+    prompt_file = "prompt.poml"
     context_file = "prompt_context.json"
     output_file = None
     
@@ -59,9 +59,9 @@ def main():
     args = sys.argv[1:]
     i = 0
     while i < len(args):
-        if args[i] == "-t" or args[i] == "--template":
+        if args[i] == "-p" or args[i] == "--prompt":
             if i + 1 < len(args):
-                template_file = args[i + 1]
+                prompt_file = args[i + 1]
                 i += 1
         elif args[i] == "-c" or args[i] == "--context":
             if i + 1 < len(args):
@@ -74,7 +74,7 @@ def main():
         elif args[i] == "-h" or args[i] == "--help":
             print("Usage: python poml_renderer.py [options]")
             print("Options:")
-            print("  -t, --template FILE    POML template file (default: prompt.poml)")
+            print("  -p, --prompt FILE      POML prompt file (default: prompt.poml)")
             print("  -c, --context FILE     Context JSON file (default: prompt_context.json)")
             print("  -o, --output FILE      Output file (default: stdout)")
             print("  -h, --help             Show this help message")
@@ -82,16 +82,16 @@ def main():
         else:
             # Legacy positional arguments
             if i == 0:
-                template_file = args[i]
+                prompt_file = args[i]
             elif i == 1:
                 context_file = args[i]
             elif i == 2:
                 output_file = args[i]
         i += 1
     
-    # Check if template exists
-    if not Path(template_file).exists():
-        print(f"Template file {template_file} not found.")
+    # Check if prompt exists
+    if not Path(prompt_file).exists():
+        print(f"Prompt file {prompt_file} not found.")
         sys.exit(1)
     
     # Load context
@@ -99,11 +99,11 @@ def main():
     context = load_context(context_file)
     
     # Render POML
-    print(f"Rendering POML template {template_file}...")
-    rendered = render_poml(template_file, context)
+    print(f"Rendering POML prompt {prompt_file}...")
+    rendered = render_poml(prompt_file, context)
     
     if not rendered:
-        print("Failed to render POML template.")
+        print("Failed to render POML prompt.")
         sys.exit(1)
     
     # Output result

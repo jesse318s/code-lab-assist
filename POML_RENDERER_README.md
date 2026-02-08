@@ -13,13 +13,13 @@ Uses default files: `prompt.poml` and `prompt_context.json`, outputs to stdout
 
 ### Custom Prompt
 ```bash
-python poml_renderer.py -t my_prompt.poml
+python poml_renderer.py -p my_prompt.poml
 ```
 Uses custom prompt with default context file
 
 ### Custom Prompt and Context
 ```bash
-python poml_renderer.py -t my_prompt.poml -c my_context.json
+python poml_renderer.py -p my_prompt.poml -c my_context.json
 ```
 
 ### Save to File
@@ -35,7 +35,7 @@ python poml_renderer.py --help
 
 ## Command Line Options
 
-- `-t, --prompt FILE` - POML prompt file (default: prompt.poml)
+- `-p, --prompt FILE` - POML prompt file (default: prompt.poml)
 - `-c, --context FILE` - Context JSON file (default: prompt_context.json)  
 - `-o, --output FILE` - Output file (default: stdout)
 - `-h, --help` - Show help message
