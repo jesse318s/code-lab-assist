@@ -1,15 +1,9 @@
-"""
-Simple POML Renderer
-
-Renders the default POML prompt with context variables.
-"""
-
+# poml_renderer module for rendering the prompt.poml with context variables
 from pathlib import Path
 import json
 import poml
 
 def main():
-    """Render the default POML prompt."""
     prompt_file = "prompt.poml"
     context_file = "prompt_context.json"
 

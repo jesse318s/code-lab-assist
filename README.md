@@ -40,11 +40,13 @@ python poml_renderer.py
 ```
 
 **Features:**
-- Renders `prompt.poml` by default
+
+- Renders `prompt.poml`
 - Loads context from `prompt_context.json` (optional)
 - Outputs rendered content directly to stdout
 - Minimal, clean implementation without command-line complexity
 
-**Default Files:**
+**Config Files:**
+
 - `prompt.poml` - The POML prompt file to render
 - `prompt_context.json` - Context variables (optional, uses empty context if not found)
