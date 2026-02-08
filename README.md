@@ -30,3 +30,21 @@ A powerful academic programming tool that generates structured lab problems and 
    - Problem description
    - Parameters
 3. Click "Generate" to create your lab
+
+### POML Renderer
+
+The project includes a simplified POML renderer (`poml_renderer.py`) for rendering POML prompts with context variables. The renderer is designed to be minimal and straightforward:
+
+```bash
+python poml_renderer.py
+```
+
+**Features:**
+- Renders `prompt.poml` by default
+- Loads context from `prompt_context.json` (optional)
+- Outputs rendered content directly to stdout
+- Minimal, clean implementation without command-line complexity
+
+**Default Files:**
+- `prompt.poml` - The POML prompt file to render
+- `prompt_context.json` - Context variables (optional, uses empty context if not found)
