@@ -29,6 +29,7 @@ class CodeLabGenerator:
             'C#': {
                 'function': self._get_csharp_function_template,
                 'class': self._get_csharp_class_template,
+                'interface': self._get_csharp_interface_template,
             },
             'C++': {
                 'function': self._get_cpp_function_template,
@@ -235,6 +236,16 @@ public class {name} {{
     public void Solve() {{
         {solution}
     }}
+}}
+'''
+
+    def _get_csharp_interface_template(self, name: str, params: str, desc: str) -> str:
+        return f'''
+/**
+ * {desc}
+ */
+public interface I{name} {{
+    void Solve({params});
 }}
 '''
 
