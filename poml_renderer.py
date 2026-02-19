@@ -15,7 +15,7 @@ def main():
 
     if Path(context_file).exists():
         try:
-            with open(context_file, 'r') as f:
+            with open(context_file, 'r', encoding='utf-8') as f:
                 context = json.load(f)
         except json.JSONDecodeError as e:
             print(f"Error parsing context file: {e}")

@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 import sys
 from pathlib import Path
 
@@ -27,7 +27,7 @@ class TestCodeLabGenerator(unittest.TestCase):
             ('C++',        'power',    'int base, int exp', 'Power',          'function',  'void solve_power'),
             ('C++',        'Matrix',   'int rows, int cols', 'A matrix',      'class',     'class Matrix'),
         ]
-        
+
         for lang, name, params, desc, tem_type, snippet in cases:
             with self.subTest(lang=lang, tem_type=tem_type):
                 result = self.generator.generate_code(lang, name, params, desc, tem_type)
@@ -44,17 +44,15 @@ class TestCodeLabGenerator(unittest.TestCase):
 
     def test_list_templates(self):
         templates = self.generator.list_templates()
-        
+
         for lang in ['Python', 'Java', 'JavaScript', 'TypeScript', 'C', 'C#', 'C++']:
             self.assertIn(lang, templates)
             self.assertIsInstance(templates[lang], list)
 
 class TestLabPanel(unittest.TestCase):
-    """Tests for the LabPanel UI class defined in code_lab_ui.ipynb."""
-
     def _make_panel(self):
-        """Import and instantiate LabPanel with display suppressed."""
-        import importlib, types
+        import types
+        import importlib
         import ipywidgets
 
         stub = types.ModuleType('IPython.display')
@@ -73,9 +71,9 @@ class TestLabPanel(unittest.TestCase):
         lines = [l for l in lines if not l.strip().startswith('panel = LabPanel()')]
         module_source = '\n'.join(lines)
         mod = types.ModuleType('lab_panel_module')
-        
+
         exec(compile(module_source, 'code_lab_ui.ipynb', 'exec'), mod.__dict__)
-        return mod.LabPanel()
+        return getattr(mod, 'LabPanel', None)()
 
     def test_panel_initializes(self):
         panel = self._make_panel()
