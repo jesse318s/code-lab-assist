@@ -79,9 +79,8 @@ DROP PROCEDURE ${this.schema}.${procName};`;
   }
 
   /**
-   * Generates a date adjustment stored procedure that safely handles
-   * month boundary overflow by checking the current day value before
-   * applying the offset.
+   * Generates a date adjustment stored procedure that applies
+   * configurable month and day offsets using DATE_ADD/DATE_SUB.
    *
    * @param {string} procName - The procedure name
    * @param {string} dateCol - The date column to adjust
