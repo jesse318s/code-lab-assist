@@ -108,7 +108,6 @@ document.getElementById("queryButton").addEventListener("click", () => {
 
   elemTxt.textContent = queries;
   output.appendChild(elemTxt);
-  queryInput.value = generator.generateSelectQuery(qCfg.idValues[0], qCfg.whereCol);
   console.log("SQL query generation complete.");
 });
 
