@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="SQL practice code" />
+    <title>SQL Practice</title>
+    <link rel="icon" type="image/png" href="img/favicon-16x16.png" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.11.0/sql-wasm.js"></script>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 8px;
+        font-size: 16px;
+        background-color: black;
+        color: lightblue;
+      }
+
+      button {
+        padding: 10px;
+        margin-left: 5px;
+        font-size: 16px;
+      }
+
+      pre {
+        margin-top: 10px;
+        white-space: pre-wrap;
+      }
+
+      #controls {
+        margin-bottom: 12px;
+      }
+
+      #queryInput {
+        width: 100%;
+        min-height: 80px;
+        margin-top: 10px;
+        padding: 8px;
+        font-family: monospace;
+        font-size: 14px;
+        background-color: #111;
+        color: lightgreen;
+        border: 1px solid #444;
+        resize: vertical;
+      }
+
+      #output {
+        margin-top: 10px;
+      }
+
+      table {
+        border-collapse: collapse;
+        margin-top: 8px;
+        width: 100%;
+      }
+
+      th,
+      td {
+        border: 1px solid #555;
+        padding: 4px 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #222;
+        color: lightyellow;
+      }
+
+      td {
+        background-color: #0a0a0a;
+      }
+
+      .error {
+        color: #ff6b6b;
+      }
+
+      .success {
+        color: lightgreen;
+      }
+
+      .info {
+        color: #aaa;
+        font-style: italic;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="controls">
+      <button type="button" id="queryButton">🔍 Generate Queries</button>
+      <button type="button" id="procButton">⚙️ Generate Procedures</button>
+      <button type="button" id="runButton">▶️ Run SQL</button>
+      <button type="button" id="tablesButton">📋 Show Tables</button>
+      <button type="button" id="resetButton">🗑️ Reset Database</button>
+    </div>
+    <textarea id="queryInput" placeholder="Enter SQL here (e.g. CREATE TABLE, INSERT INTO, SELECT ...)"></textarea>
+    <div id="output"></div>
+
+    <script src="js/SQLDatabase.js" type="module"></script>
+    <script src="js/SQLGenerator.js" type="module"></script>
+    <script src="index.js" type="module"></script>
+    <script src="index.test.js" type="module"></script>
+  </body>
+</html>
