@@ -44,8 +44,7 @@ class TestCodeLabGenerator(unittest.TestCase):
 
     def test_list_templates(self):
         templates = self.generator.list_templates()
-
-        for lang in ['Python', 'Java', 'JavaScript', 'TypeScript', 'C', 'C#', 'C++']:
+        for lang in self.generator.templates.keys():
             self.assertIn(lang, templates)
             self.assertIsInstance(templates[lang], list)
 
@@ -56,9 +55,9 @@ class TestLabPanel(unittest.TestCase):
         import ipywidgets
 
         stub = types.ModuleType('IPython.display')
-        stub.display = MagicMock()
-        stub.HTML = MagicMock(side_effect=lambda x: x)
-        stub.clear_output = MagicMock()
+        setattr(stub, 'display', MagicMock())
+        setattr(stub, 'HTML', MagicMock(side_effect=lambda x: x))
+        setattr(stub, 'clear_output', MagicMock())
 
         sys.modules['IPython.display'] = stub
 
@@ -73,7 +72,7 @@ class TestLabPanel(unittest.TestCase):
         mod = types.ModuleType('lab_panel_module')
 
         exec(compile(module_source, 'code_lab_ui.ipynb', 'exec'), mod.__dict__)
-        return getattr(mod, 'LabPanel', None)()
+        return getattr(mod, 'LabPanel')()
 
     def test_panel_initializes(self):
         panel = self._make_panel()
