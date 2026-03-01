@@ -19,6 +19,7 @@ A powerful academic programming tool that generates structured lab problems and 
 - _ipykernel_ and _ipywidgets_ python packages for Jupyter notebook execution (see requirements.txt)
 - _poml_ python package for rendering POML prompts (see requirements.txt)
 - Language-specific compilers/interpreters for testing code
+- A web browser, internet connection, and way to serve websites locally for the SQL Lab (e.g., Live Server extension in VS Code)
 
 ### Usage
 
@@ -61,7 +62,7 @@ Open `sql-lab/index.html` in a browser. The page loads sql.js (SQLite compiled t
 
 **UI Controls:**
 
-- **Generate Queries** — Produces SELECT query templates using the configured schema, table, and identifier values, and populates the textarea with a runnable query
+- **Generate Queries** — Produces SELECT query templates using the configured schema, table, and identifier values
 - **Generate Procedures** — Produces an UPDATE stored procedure template from the configured parameters
 - **Run SQL** — Executes whatever SQL is in the textarea against the in-browser SQLite database. SELECT and PRAGMA statements display results as a table; write statements (CREATE, INSERT, UPDATE, DELETE) report the number of rows affected
 - **Show Tables** — Lists all tables in the database with their column metadata (name, type, NOT NULL, primary key)
