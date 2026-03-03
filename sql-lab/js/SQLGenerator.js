@@ -20,6 +20,11 @@ class SQLGenerator {
   /**
    * Generates a SELECT query for a given identifier value.
    *
+   * WARNING: Values are interpolated directly into SQL strings without
+   * parameterization. This is intended for internal tooling only and
+   * should not be used in production — use parameterized queries to
+   * prevent SQL injection.
+   *
    * @param {string} idValue - The identifier value to query
    * @param {string} whereCol - The WHERE clause column name
    * @returns {string} The formatted SQL SELECT statement
@@ -50,6 +55,11 @@ class SQLGenerator {
 
   /**
    * Generates an UPDATE stored procedure for correcting a column value.
+   *
+   * WARNING: Values are interpolated directly into SQL strings without
+   * parameterization. This is intended for internal tooling only and
+   * should not be used in production — use parameterized queries to
+   * prevent SQL injection.
    *
    * @param {string} procName - The procedure name
    * @param {string} setCol - The column to update
@@ -89,6 +99,11 @@ DROP PROCEDURE ${this.schema}.${procName};`;
   /**
    * Generates a date adjustment stored procedure that applies
    * configurable month and day offsets using DATE_ADD/DATE_SUB.
+   *
+   * WARNING: Values are interpolated directly into SQL strings without
+   * parameterization. This is intended for internal tooling only and
+   * should not be used in production — use parameterized queries to
+   * prevent SQL injection.
    *
    * @param {string} procName - The procedure name
    * @param {string} dateCol - The date column to adjust

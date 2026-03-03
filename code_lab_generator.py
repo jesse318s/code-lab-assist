@@ -36,8 +36,6 @@ class CodeLabGenerator:
                 'class': self._get_cpp_class_template,
             },
             'SQL': {
-                'function': self._get_sql_function_template,
-                'class': self._get_sql_class_template,
                 'procedure': self._get_sql_procedure_template,
             }
         }
@@ -286,41 +284,6 @@ public:
 
 private:
 }};
-'''
-
-    def _get_sql_function_template(self, name: str, params: str, desc: str) -> str:
-        solution = '// TODO: Implement solution'
-
-        return f'''
-/**
- * {desc}
- */
-function solve_{name}({params}) {{
-    {solution}
-}}
-
-export {{ solve_{name} }};
-'''
-
-    def _get_sql_class_template(self, name: str, params: str, desc: str) -> str:
-        solution = '// TODO: Implement solution'
-        init_params = params if params else ''
-
-        return f'''
-/**
- * {desc}
- */
-class {name} {{
-    constructor({init_params}) {{
-        {solution}
-    }}
-
-    solve() {{
-        {solution}
-    }}
-}}
-
-export {{ {name} }};
 '''
 
     def _get_sql_procedure_template(self, name: str, params: str, desc: str) -> str:

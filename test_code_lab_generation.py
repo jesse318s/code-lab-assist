@@ -26,8 +26,6 @@ class TestCodeLabGenerator(unittest.TestCase):
             ('C#',         'Drawable', '',               'Drawable',          'interface', 'interface IDrawable'),
             ('C++',        'power',    'int base, int exp', 'Power',          'function',  'void solve_power'),
             ('C++',        'Matrix',   'int rows, int cols', 'A matrix',      'class',     'class Matrix'),
-            ('SQL',        'getTotal', 'p_id INT',           'Get total',      'function',  'function solve_getTotal'),
-            ('SQL',        'Order',    'order_id INT',       'An order',       'class',     'class Order'),
             ('SQL',        'AddUser',  'IN p_name VARCHAR(100)', 'Add a user', 'procedure', 'CREATE PROCEDURE AddUser'),
         ]
 

@@ -59,10 +59,14 @@ class SQLDatabase {
    * @returns {{ changes: number }} The number of rows affected
    */
   execute(sql) {
-    this.db.run(sql);
-    this.save();
+    try {
+      this.db.run(sql);
+      this.save();
 
-    return { changes: this.db.getRowsModified() };
+      return { changes: this.db.getRowsModified() };
+    } catch (error) {
+      throw new Error(`SQL execution error: ${error.message}`);
+    }
   }
 
   /**
@@ -72,22 +76,26 @@ class SQLDatabase {
    * @returns {{ columns: string[], rows: object[] }} The column names and row data
    */
   query(sql) {
-    const results = this.db.exec(sql);
+    try {
+      const results = this.db.exec(sql);
 
-    if (results.length === 0) return { columns: [], rows: [] };
+      if (results.length === 0) return { columns: [], rows: [] };
 
-    const columns = results[0].columns;
-    const rows = results[0].values.map((row) => {
-      const obj = {};
+      const columns = results[0].columns;
+      const rows = results[0].values.map((row) => {
+        const obj = {};
 
-      columns.forEach((col, i) => {
-        obj[col] = row[i];
+        columns.forEach((col, i) => {
+          obj[col] = row[i];
+        });
+
+        return obj;
       });
 
-      return obj;
-    });
-
-    return { columns, rows };
+      return { columns, rows };
+    } catch (error) {
+      throw new Error(`SQL query error: ${error.message}`);
+    }
   }
 
   /**
@@ -110,18 +118,24 @@ class SQLDatabase {
    * @returns {object[]} Array of column metadata objects
    */
   describeTable(tableName) {
-    const result = this.db.exec(`PRAGMA table_info('${tableName}');`);
+    try {
+      const result = this.db.exec(`PRAGMA table_info('${tableName}');`);
 
-    if (result.length === 0) return [];
+      if (result.length === 0) return [];
 
-    return result[0].values.map((row) => ({
-      cid: row[0],
-      name: row[1],
-      type: row[2],
-      notNull: row[3] === 1,
-      defaultValue: row[4],
-      pk: row[5] === 1,
-    }));
+      return result[0].values.map((row) => ({
+        cid: row[0],
+        name: row[1],
+        type: row[2],
+        notNull: row[3] === 1,
+        defaultValue: row[4],
+        pk: row[5] === 1,
+      }));
+    } catch (error) {
+      throw new Error(
+        `Failed to describe table '${tableName}': ${error.message}`,
+      );
+    }
   }
 
   /**
