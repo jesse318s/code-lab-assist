@@ -1,14 +1,14 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "theme": "github",
-  "keybinds": {
-    "command_list": "ctrl+o"
-  },
   "instructions": [".github/copilot-instructions.md"],
   "permission": {
     "*": "ask"
   },
   "agent": {
+    "debugger": {
+      "mode": "primary",
+      "prompt": "{file:../.github/agents/debugger.md}"
+    },
     "poml-prompt-engineer": {
       "mode": "primary",
       "prompt": "{file:../.github/agents/poml-prompt-engineer.md}"

@@ -1,0 +1,7 @@
+{
+  "$schema": "https://opencode.ai/tui.json",
+  "theme": "github",
+  "keybinds": {
+    "command_list": "ctrl+o"
+  }
+}
