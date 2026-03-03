@@ -1,0 +1,19 @@
+{
+  "generator": {
+    "schema": "app_db",
+    "table": "users"
+  },
+  "query": {
+    "idValues": ["1001", "1002"],
+    "whereCol": "user_id"
+  },
+  "proc": {
+    "procName": "update_status_proc",
+    "setCol": "status",
+    "setVal": "inactive",
+    "whereCol": "user_id",
+    "whereVal": "1001",
+    "condCol": "role",
+    "condVal": "admin"
+  }
+}

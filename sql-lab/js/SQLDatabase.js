@@ -97,7 +97,7 @@ class SQLDatabase {
    */
   listTables() {
     const result = this.query(
-      "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;"
+      "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;",
     );
 
     return result.rows.map((row) => row.name);

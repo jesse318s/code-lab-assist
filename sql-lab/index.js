@@ -32,7 +32,10 @@ const loadConfig = async () => {
 };
 
 const config = await loadConfig();
-const generator = new SQLGenerator(config.generator.schema, config.generator.table);
+const generator = new SQLGenerator(
+  config.generator.schema,
+  config.generator.table,
+);
 const database = new SQLDatabase("sql_lab_db");
 const output = document.getElementById("output");
 const queryInput = document.getElementById("queryInput");
@@ -122,7 +125,7 @@ document.getElementById("procButton").addEventListener("click", () => {
     pCfg.whereCol,
     pCfg.whereVal,
     pCfg.condCol,
-    pCfg.condVal
+    pCfg.condVal,
   );
   const elemTxt = document.createElement("pre");
 
@@ -142,7 +145,10 @@ document.getElementById("runButton").addEventListener("click", () => {
   }
 
   try {
-    const upperSql = sql.replace(/^--.*\n/gm, "").trimStart().toUpperCase();
+    const upperSql = sql
+      .replace(/^--.*\n/gm, "")
+      .trimStart()
+      .toUpperCase();
     const isReadStatement = /^(SELECT|PRAGMA|EXPLAIN|WITH)\b/.test(upperSql);
 
     if (isReadStatement) {
@@ -155,7 +161,7 @@ document.getElementById("runButton").addEventListener("click", () => {
 
       showMessage(
         `Statement executed successfully. ${result.changes} row(s) affected.`,
-        "success"
+        "success",
       );
     }
 

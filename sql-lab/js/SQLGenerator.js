@@ -60,7 +60,15 @@ class SQLGenerator {
    * @param {string} [condVal] - Optional additional condition value
    * @returns {string} The formatted SQL stored procedure
    */
-  generateUpdateProc(procName, setCol, setVal, whereCol, whereVal, condCol, condVal) {
+  generateUpdateProc(
+    procName,
+    setCol,
+    setVal,
+    whereCol,
+    whereVal,
+    condCol,
+    condVal,
+  ) {
     let whereClause = `${whereCol} = '${whereVal}'`;
 
     if (condCol && condVal) whereClause += ` AND ${condCol} = '${condVal}'`;
@@ -90,7 +98,14 @@ DROP PROCEDURE ${this.schema}.${procName};`;
    * @param {number} dayOffset - Number of days to adjust (positive or negative)
    * @returns {string} The formatted SQL date adjustment procedure
    */
-  generateDateAdjustProc(procName, dateCol, whereCol, whereVal, monthOffset, dayOffset) {
+  generateDateAdjustProc(
+    procName,
+    dateCol,
+    whereCol,
+    whereVal,
+    monthOffset,
+    dayOffset,
+  ) {
     const absMonths = Math.abs(monthOffset);
     const absDays = Math.abs(dayOffset);
     const monthFn = monthOffset >= 0 ? "DATE_ADD" : "DATE_SUB";
