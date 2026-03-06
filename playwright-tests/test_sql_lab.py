@@ -25,4 +25,4 @@ def test_no_uncaught_errors(serve, page: Page):
 
     page.goto(url)
     page.wait_for_timeout(500)
-    assert errors == [], f"Uncaught JS errors: {errors}"
+    assert not errors, f"Uncaught JS errors: {errors}"
