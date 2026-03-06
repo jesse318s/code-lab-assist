@@ -1,3 +1,5 @@
 ipykernel
 ipywidgets
 poml
+pytest-playwright
+asttokens>=3.0.1 # pin to avoid DeprecationWarning
