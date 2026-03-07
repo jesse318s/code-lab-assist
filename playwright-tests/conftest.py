@@ -4,7 +4,7 @@ import http.server
 import functools
 from pathlib import Path
 import pytest
- 
+
 @pytest.fixture(scope="session")
 def serve():
     workspace_root = Path(__file__).parent.parent
@@ -29,8 +29,10 @@ def serve():
         thread = threading.Thread(target=httpd.serve_forever, daemon=True)
 
         thread.start()
+
         url = f"http://127.0.0.1:{port}"
         cache[key] = url
+
         servers.append(httpd)
         return url
 
