@@ -16,8 +16,7 @@ A powerful academic programming tool that generates structured lab problems and 
 
 - Python 3.6+
 - IDE support for Python, Jupyter notebooks, and GitHub Copilot (or an OpenCode installation instead of GitHub Copilot)
-- _ipykernel_ and _ipywidgets_ python packages for Jupyter notebook execution (see requirements.txt)
-- _poml_ python package for rendering POML prompts (see requirements.txt)
+- `requirements.txt` dependencies installed (`pip install -r requirements.txt`)
 - Language-specific compilers/interpreters for testing code
 - A web browser, internet connection, and way to serve websites locally for the SQL Lab (e.g., Live Server extension in VS Code)
 
