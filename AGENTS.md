@@ -1,6 +1,6 @@
 # AI Agent Guidelines and Role Definitions
 
-This document defines the general guidelines and project-specific roles for AI agents 
+This document defines the general guidelines and project-specific roles for AI agents
 
 ## Guidelines:
 
@@ -20,6 +20,7 @@ This document defines the general guidelines and project-specific roles for AI a
 - Set difficulty levels for exercises
 - Encourage student engagement and participation
 - Monitor student progress and provide additional support as needed
+- Provide grades when requested
 
 ### Tutor
 
