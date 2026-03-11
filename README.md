@@ -21,10 +21,11 @@ A powerful academic programming tool that generates structured lab problems and 
 - _poml_ python package for rendering POML prompts (see requirements.txt)
 - Language-specific compilers/interpreters for testing code
 - A web browser, internet connection, and way to serve websites locally for the SQL Lab (e.g., Live Server extension in VS Code)
+- Git access to the private [brainscan](https://github.com/jesse318s/brainscan) repository (required for runtime vulnerability scanning)
 
 ### Usage
 
-1. Launch the Jupyter notebook interface (code_lab_ui.ipynb)
+1. Launch the Jupyter notebook interface (`code_lab_ui.ipynb`)
 2. Use the interactive form to specify:
    - Programming language
    - Code type (function, class, or interface)
@@ -34,6 +35,26 @@ A powerful academic programming tool that generates structured lab problems and 
 3. Click "Generate" to create your lab
 
 ### Browser Runtime Security Testing (BrainScan + Playwright)
+
+#### BrainScan Submodule Setup
+
+This project uses the private [brainscan](https://github.com/jesse318s/brainscan) repository as a git submodule for browser-based runtime vulnerability scanning.
+
+**To clone the repository with the submodule:**
+
+```bash
+git clone --recurse-submodules https://github.com/jesse318s/brainscan.git
+```
+
+**To initialize the submodule after cloning:**
+
+```bash
+git submodule update --init --recursive
+```
+
+This will populate the `brainscan/` directory with the required files, including the vendored `brain.js` bundle.
+
+#### Running the Playwright-based Runtime Scan Tests
 
 The Playwright suite includes runtime security tests in `playwright-tests/test_brainscan.py`.
 These tests inject the vendored BrainScan browser bundle (`brainscan/vendor/brain.js/browser.js`) into the page, restore the trained network snapshot from `brainscan/data/trained-network.json`, and scan runtime page content for vulnerability indicators.
@@ -53,8 +74,10 @@ pytest playwright-tests/test_brainscan.py
 If the trained snapshot file does not exist yet, generate it by running BrainScan once from `brainscan/`:
 
 ```bash
-node index.js
+cd brainscan && node index.js && cd ..
 ```
+
+This will create `brainscan/data/trained-network.json` (gitignored) for use by the tests.
 
 ### POML Renderer
 
