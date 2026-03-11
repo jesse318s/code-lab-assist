@@ -7,6 +7,7 @@ A powerful academic programming tool that generates structured lab problems and 
 - **Multi-Language Support**: Generate code templates for Python, JavaScript, TypeScript, Java, C, C++, C#, and SQL
 - **Versatile Code Templates**: Generate functions, classes, and interfaces with appropriate language-specific syntax
 - **Automated Testing**: Generate comprehensive test suites for all supported languages
+- **Runtime Vulnerability Scanning**: Playwright tests can run BrainScan directly in the browser runtime to detect risky patterns in rendered lab code
 - **User-Friendly Interface**: Interactive Jupyter notebook interface for easy lab creation
 - **Heuristic POML Generation**: Generate powerful and intuitive POML prompts for any purpose
 
@@ -31,6 +32,29 @@ A powerful academic programming tool that generates structured lab problems and 
    - Problem description
    - Parameters
 3. Click "Generate" to create your lab
+
+### Browser Runtime Security Testing (BrainScan + Playwright)
+
+The Playwright suite includes runtime security tests in `playwright-tests/test_brainscan.py`.
+These tests inject the vendored BrainScan browser bundle (`brainscan/vendor/brain.js/browser.js`) into the page, restore the trained network snapshot from `brainscan/data/trained-network.json`, and scan runtime page content for vulnerability indicators.
+
+Key behavior:
+
+- Scanning happens inside the browser runtime (not through a separate scan API call)
+- The injected BrainScan script is excluded from the scanned content to avoid false positives from the scanner implementation itself
+- Tests fail when the predicted risk reaches the Critical threshold
+
+To run the Playwright-based runtime scan tests:
+
+```bash
+pytest playwright-tests/test_brainscan.py
+```
+
+If the trained snapshot file does not exist yet, generate it by running BrainScan once from `brainscan/`:
+
+```bash
+node index.js
+```
 
 ### POML Renderer
 
