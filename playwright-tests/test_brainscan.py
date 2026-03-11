@@ -8,11 +8,9 @@ import pytest
 from playwright.sync_api import Page
 
 CRITICAL_RISK_THRESHOLD = 0.75
-
 WORKSPACE_ROOT = Path(__file__).parent.parent
 BRAIN_JS_PATH = WORKSPACE_ROOT / "brainscan" / "vendor" / "brain.js" / "browser.js"
 SNAPSHOT_PATH = WORKSPACE_ROOT / "brainscan" / "data" / "trained-network.json"
-
 LAB_DIRS = [
     "javascript-lab",
     "sql-lab",
@@ -35,6 +33,7 @@ def test_no_critical_vulns(serve, brain_snapshot, page: Page, lab_dir):
     # Inject the vendored brain.js browser bundle. add_script_tag returns the
     # exact ElementHandle, so we tag it directly — no reliance on script order.
     brain_script = page.add_script_tag(path=str(BRAIN_JS_PATH))
+
     brain_script.evaluate("el => el.setAttribute('data-injected', 'brainscan')")
 
     # Run the full scan inside the browser:
@@ -46,20 +45,20 @@ def test_no_critical_vulns(serve, brain_snapshot, page: Page, lab_dir):
     result = page.evaluate("""
         (snapshot) => {
             const net = new brain.NeuralNetwork();
+            
             net.fromJSON(snapshot);
 
             const labScripts = Array.from(
                 document.querySelectorAll('script:not([data-injected="brainscan"])')
             );
             const scriptCode = labScripts.map(s => s.textContent).join('\\n');
-
             const domClone = document.documentElement.cloneNode(true);
             const injected = domClone.querySelector('script[data-injected="brainscan"]');
+            
             if (injected) injected.remove();
+            
             const html = domClone.outerHTML;
-
             const code = html + '\\n' + scriptCode;
-
             const features = {
                 has_eval:             /\\beval\\s*\\(/.test(code) ? 1 : 0,
                 has_inner_html:       /\\.innerHTML\\s*=/.test(code) ? 1 : 0,
@@ -70,7 +69,6 @@ def test_no_critical_vulns(serve, brain_snapshot, page: Page, lab_dir):
                 has_dynamic_import:   /require\\s*\\(\\s*(?!['"`])/.test(code) || /import\\s*\\(\\s*(?!['"`])/.test(code) ? 1 : 0,
                 has_http_request:     /https?:\\/\\//.test(code) || /\\b(fetch|axios\\.(get|post|put|delete)|http\\.get|https\\.get)\\s*\\(/.test(code) ? 1 : 0,
             };
-
             const output = net.run(features);
             const risk = output.risk;
             const riskPercent = Math.round(risk * 100);
@@ -78,7 +76,6 @@ def test_no_critical_vulns(serve, brain_snapshot, page: Page, lab_dir):
             return { risk, riskPercent, features };
         }
     """, brain_snapshot)
-
     triggered = [k for k, v in result["features"].items() if v == 1]
 
     assert result["risk"] < CRITICAL_RISK_THRESHOLD, (
