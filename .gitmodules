@@ -1,0 +1,3 @@
+[submodule "brainscan"]
+	path = brainscan
+	url = https://github.com/jesse318s/brainscan.git

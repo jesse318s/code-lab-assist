@@ -7,6 +7,7 @@ A powerful academic programming tool that generates structured lab problems and 
 - **Multi-Language Support**: Generate code templates for Python, JavaScript, TypeScript, Java, C, C++, C#, and SQL
 - **Versatile Code Templates**: Generate functions, classes, and interfaces with appropriate language-specific syntax
 - **Automated Testing**: Generate comprehensive test suites for all supported languages
+- **Runtime Vulnerability Scanning**: Playwright tests can run BrainScan directly in the browser runtime to detect risky patterns in rendered lab code
 - **User-Friendly Interface**: Interactive Jupyter notebook interface for easy lab creation
 - **Heuristic POML Generation**: Generate powerful and intuitive POML prompts for any purpose
 
@@ -19,10 +20,11 @@ A powerful academic programming tool that generates structured lab problems and 
 - `requirements.txt` dependencies installed (`pip install -r requirements.txt`)
 - Language-specific compilers/interpreters for testing code
 - A web browser, internet connection, and way to serve websites locally for the SQL Lab (e.g., Live Server extension in VS Code)
+- Git access to the private [brainscan](https://github.com/jesse318s/brainscan) repository (required for runtime vulnerability scanning)
 
 ### Usage
 
-1. Launch the Jupyter notebook interface (code_lab_ui.ipynb)
+1. Launch the Jupyter notebook interface (`code_lab_ui.ipynb`)
 2. Use the interactive form to specify:
    - Programming language
    - Code type (function, class, or interface)
@@ -30,6 +32,51 @@ A powerful academic programming tool that generates structured lab problems and 
    - Problem description
    - Parameters
 3. Click "Generate" to create your lab
+
+### Browser Runtime Security Testing (BrainScan + Playwright)
+
+#### BrainScan Submodule Setup
+
+This project uses the private [brainscan](https://github.com/jesse318s/brainscan) repository as a git submodule for browser-based runtime vulnerability scanning.
+
+**To clone the repository with the submodule:**
+
+```bash
+git clone --recurse-submodules https://github.com/jesse318s/brainscan.git
+```
+
+**To initialize the submodule after cloning:**
+
+```bash
+git submodule update --init --recursive
+```
+
+This will populate the `brainscan/` directory with the required files, including the vendored `brain.js` bundle.
+
+#### Running the Playwright-based Runtime Scan Tests
+
+The Playwright suite includes runtime security tests in `playwright-tests/test_brainscan.py`.
+These tests inject the vendored BrainScan browser bundle (`brainscan/vendor/brain.js/browser.js`) into the page, restore the trained network snapshot from `brainscan/data/trained-network.json`, and scan runtime page content for vulnerability indicators.
+
+Key behavior:
+
+- Scanning happens inside the browser runtime (not through a separate scan API call)
+- The injected BrainScan script is excluded from the scanned content to avoid false positives from the scanner implementation itself
+- Tests fail when the predicted risk reaches the Critical threshold
+
+To run the Playwright-based runtime scan tests:
+
+```bash
+pytest playwright-tests/test_brainscan.py
+```
+
+If the trained snapshot file does not exist yet, generate it by running BrainScan once from `brainscan/`:
+
+```bash
+cd brainscan && node index.js && cd ..
+```
+
+This will create `brainscan/data/trained-network.json` (gitignored) for use by the tests.
 
 ### POML Renderer
 
