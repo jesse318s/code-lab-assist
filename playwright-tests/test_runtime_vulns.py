@@ -24,7 +24,7 @@ def brain_snapshot():
     return json.loads(SNAPSHOT_PATH.read_text(encoding="utf-8"))
 
 @pytest.mark.parametrize("lab_dir", LAB_DIRS)
-def test_no_critical_vulns(serve, brain_snapshot, page: Page, lab_dir):
+def test_no_critical_runtime_vulns(serve, brain_snapshot, page: Page, lab_dir):
     url = serve(lab_dir)
 
     page.goto(url)
