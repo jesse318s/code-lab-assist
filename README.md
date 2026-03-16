@@ -20,7 +20,7 @@ A powerful academic programming tool that generates structured lab problems and 
 - `requirements.txt` dependencies installed (`pip install -r requirements.txt`)
 - Language-specific compilers/interpreters for testing code
 - A web browser, internet connection, and way to serve websites locally for the SQL Lab (e.g., Live Server extension in VS Code)
-- Git access to the private [brainscan](https://github.com/jesse318s/brainscan) repository (required for runtime vulnerability scanning)
+- Git access to the [brainscan](https://github.com/jesse318s/brainscan) repository (required for runtime vulnerability scanning)
 
 ### Usage
 
