@@ -37,7 +37,7 @@ A powerful academic programming tool that generates structured lab problems and 
 
 #### BrainScan Submodule Setup
 
-This project uses the private [brainscan](https://github.com/jesse318s/brainscan) repository as a git submodule for browser-based runtime vulnerability scanning.
+This project uses the [brainscan](https://github.com/jesse318s/brainscan) repository as a git submodule for browser-based runtime vulnerability scanning.
 
 **To clone the repository with the submodule:**
 
@@ -64,19 +64,13 @@ Key behavior:
 - The injected BrainScan script is excluded from the scanned content to avoid false positives from the scanner implementation itself
 - Tests fail when the predicted risk reaches the Critical threshold
 
-To run the Playwright-based runtime scan tests:
-
-```bash
-pytest playwright-tests/test_brainscan.py
-```
-
 If the trained snapshot file does not exist yet, generate it by running BrainScan once from `brainscan/`:
 
 ```bash
 cd brainscan && node index.js && cd ..
 ```
 
-This will create `brainscan/data/trained-network.json` (gitignored) for use by the tests.
+This will create `brainscan/data/trained-network.json` (gitignored) for use by the tests. (It may need to be recreated if it causes false positives)
 
 ### POML Renderer
 
