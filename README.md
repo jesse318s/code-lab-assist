@@ -45,14 +45,6 @@ This project uses the [brainscan](https://github.com/jesse318s/brainscan) reposi
 git clone --recurse-submodules https://github.com/jesse318s/brainscan.git
 ```
 
-**To initialize the submodule after cloning:**
-
-```bash
-git submodule update --init --recursive
-```
-
-This will populate the `brainscan/` directory with the required files, including the vendored `brain.js` bundle.
-
 #### Running the Playwright-based Runtime Scan Tests
 
 The Playwright suite includes runtime security tests in `playwright-tests/test_brainscan.py`.
