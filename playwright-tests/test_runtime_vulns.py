@@ -2,15 +2,15 @@
 # Injects the vendored brain.js browser bundle into each live lab page,
 # then runs the trained neural network entirely in the browser to scan
 # the runtime content for vulnerability patterns. No external server required.
-import json
 from pathlib import Path
 import pytest
+import json
 from playwright.sync_api import Page
 
 CRITICAL_RISK_THRESHOLD = 0.75
 WORKSPACE_ROOT = Path(__file__).parent.parent
-BRAIN_JS_PATH = WORKSPACE_ROOT / "brainscan" / "vendor" / "brain.js" / "browser.js"
 SNAPSHOT_PATH = WORKSPACE_ROOT / "brainscan" / "data" / "trained-network.json"
+BRAIN_JS_PATH = WORKSPACE_ROOT / "brainscan" / "vendor" / "brain.js" / "browser.js"
 LAB_DIRS = [
     "javascript-lab",
     "sql-lab",
@@ -24,8 +24,13 @@ def brain_snapshot():
     return json.loads(SNAPSHOT_PATH.read_text(encoding="utf-8"))
 
 @pytest.mark.parametrize("lab_dir", LAB_DIRS)
-def test_no_critical_runtime_vulns(serve, brain_snapshot, page: Page, lab_dir):
+def test_no_critical_vulns(serve, brain_snapshot, page: Page, lab_dir):
     url = serve(lab_dir)
+    download_path = WORKSPACE_ROOT / lab_dir / "index.js"
+    javascript = ""
+
+    with open(download_path, 'r') as f:
+        javascript = f.read()
 
     page.goto(url)
     page.wait_for_load_state("load")
@@ -33,6 +38,7 @@ def test_no_critical_runtime_vulns(serve, brain_snapshot, page: Page, lab_dir):
     # Inject the vendored brain.js browser bundle. add_script_tag returns the
     # exact ElementHandle, so we tag it directly — no reliance on script order.
     brain_script = page.add_script_tag(path=str(BRAIN_JS_PATH))
+    javascript = page.add_script_tag(content=javascript)
 
     brain_script.evaluate("el => el.setAttribute('data-injected', 'brainscan')")
 
