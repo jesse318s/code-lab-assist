@@ -48,7 +48,7 @@ git clone --recurse-submodules https://github.com/jesse318s/brainscan.git
 #### Running the Playwright-based Vulnerability Scan Tests
 
 The Playwright suite includes runtime security tests in `playwright-tests/test_vulns.py`.
-These tests inject the vendored BrainScan browser bundle (`brainscan/vendor/brain.js/browser.js`) into the page, restore the trained network snapshot from `brainscan/data/trained-network.json`, and scan runtime page content for vulnerability indicators.
+These tests inject the vendored BrainScan browser bundle (`brainscan/vendor/brain.js/browser.js`) and lab index src code into the page, restore the trained network snapshot from `brainscan/data/trained-network.json`, and scan runtime page content for vulnerability indicators.
 
 Key behavior:
 
