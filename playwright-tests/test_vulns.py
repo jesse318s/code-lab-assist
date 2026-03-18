@@ -3,8 +3,8 @@
 # then runs the trained neural network entirely in the browser to scan
 # the runtime content for vulnerability patterns. No external server required.
 from pathlib import Path
-import pytest
 import json
+import pytest
 from playwright.sync_api import Page
 
 CRITICAL_RISK_THRESHOLD = 0.75
@@ -19,7 +19,7 @@ LAB_DIRS = [
 @pytest.fixture(scope="session")
 def brain_snapshot():
     if not SNAPSHOT_PATH.exists():
-        pytest.skip("BrainScan snapshot not found — run `node index.js` in brainscan/ to generate it")
+        pytest.skip("BrainScan snapshot not found. Run `node index.js` in brainscan/ to create it")
 
     return json.loads(SNAPSHOT_PATH.read_text(encoding="utf-8"))
 
@@ -29,25 +29,17 @@ def test_no_critical_vulns(serve, brain_snapshot, page: Page, lab_dir):
     download_path = WORKSPACE_ROOT / lab_dir / "index.js"
     javascript = ""
 
-    with open(download_path, 'r') as f:
+    with open(download_path, "r", encoding="utf-8") as f:
         javascript = f.read()
 
     page.goto(url)
     page.wait_for_load_state("load")
 
-    # Inject the vendored brain.js browser bundle. add_script_tag returns the
-    # exact ElementHandle, so we tag it directly — no reliance on script order.
     brain_script = page.add_script_tag(path=str(BRAIN_JS_PATH))
     javascript = page.add_script_tag(content=javascript)
 
     brain_script.evaluate("el => el.setAttribute('data-injected', 'brainscan')")
 
-    # Run the full scan inside the browser:
-    # 1. Restore the trained network from the snapshot
-    # 2. Collect runtime code: rendered HTML (excluding the injected script tag)
-    #    + text of all inline script elements except the brain.js bundle
-    # 3. Extract binary vulnerability features using the same regexes as utils.js
-    # 4. Run the neural network and return the risk score + triggered features
     result = page.evaluate("""
         (snapshot) => {
             const net = new brain.NeuralNetwork();
