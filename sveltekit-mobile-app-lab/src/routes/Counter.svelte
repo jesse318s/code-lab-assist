@@ -1,6 +1,6 @@
 <script>
 	import { spring } from 'svelte/motion';
-	import { modulo } from './utils'
+	import { modulo } from './utils';
 
 	let count = 0;
 

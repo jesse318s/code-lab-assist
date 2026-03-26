@@ -2,7 +2,7 @@
 
 # create-svelte
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte). **This project includes Capacitor integration for mobile application development.**
+Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte). **This project includes a Capacitor+Android integration for mobile application development.**
 
 ## Creating a project (Svelte)
 
