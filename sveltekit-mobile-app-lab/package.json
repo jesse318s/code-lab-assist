@@ -1,0 +1,32 @@
+{
+	"name": "sveltekit-mobile-app-lab",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"sync": "npm run build && npx cap sync"
+	},
+	"devDependencies": {
+		"@capacitor/cli": "^8.2.0",
+		"@fontsource/fira-mono": "^5.0.0",
+		"@neoconfetti/svelte": "^2.0.0",
+		"@sveltejs/adapter-static": "^3.0.1",
+		"@sveltejs/kit": "^2.55.0",
+		"@testing-library/svelte": "^5.3.1",
+		"jsdom": "^29.0.1",
+		"svelte": "^5.2.2",
+		"vite": "^8.0.0",
+		"vitest": "4.1.1"
+	},
+	"overrides": {
+		"cookie": "^0.7.2",
+		"esbuild": "^0.25.0"
+	},
+	"type": "module",
+	"dependencies": {
+		"@capacitor/android": "^8.2.0",
+		"@capacitor/core": "^8.2.0",
+		"@capacitor/ios": "^8.2.0"
+	}
+}

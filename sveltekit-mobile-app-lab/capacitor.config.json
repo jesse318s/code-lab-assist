@@ -1,0 +1,5 @@
+{
+  "appId": "com.sveltekit_mobile_app_lab.app",
+  "appName": "sveltekit-mobile-app-lab",
+  "webDir": "build"
+}

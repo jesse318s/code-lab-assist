@@ -10,6 +10,7 @@ A powerful academic programming tool that generates structured lab problems and 
 - **Vulnerability Scanning**: Playwright tests can run BrainScan directly in the browser runtime to detect risky patterns in all lab code
 - **User-Friendly Interface**: Interactive Jupyter notebook interface for easy lab creation
 - **Heuristic POML Generation**: Generate powerful and intuitive POML prompts for any purpose
+- **Mobile App Lab (Native SvelteKit)**: The `sveltekit-mobile-app-lab` directory provides a SvelteKit+Capacitor lab for creating and testing native mobile apps
 
 ## Getting Started
 
