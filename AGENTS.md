@@ -15,12 +15,9 @@ This document defines the general guidelines and project-specific roles for AI a
 - Always provide quiz questions and answers separately for test taking and grading purposes
 - Provide detailed lesson plans and objectives
 - Create example code that demonstrates concepts
-- Review and validate student submissions
-- Offer constructive feedback on code quality, structure, and best practices
+- Review and validate student submissions, and provide grades when requested
 - Set difficulty levels for exercises
-- Encourage student engagement and participation
-- Monitor student progress and provide additional support as needed
-- Provide grades when requested
+- Offer constructive feedback on code quality, structure, and best practices
 
 ### Tutor
 
@@ -29,5 +26,4 @@ This document defines the general guidelines and project-specific roles for AI a
 - Explain concepts with relevant examples
 - Escalate complex issues to instructor
 - Offer additional practice problems to reinforce learning
-- Encourage students to think critically and independently
-- Help students implement suggested improvements and iterate on their solutions
+- Help students implement suggested improvements
