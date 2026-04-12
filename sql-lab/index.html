@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="SQL practice code" />
-    <title>SQL Practice</title>
+    <meta name="description" content="SQL practice and learning lab" />
+    <title>SQL Lab</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.11.0/sql-wasm.js"></script>
     <style>
       * {
@@ -20,19 +20,71 @@
         color: lightblue;
       }
 
+      .tab-container {
+        margin-bottom: 12px;
+      }
+
+      .tab-buttons {
+        display: flex;
+        gap: 4px;
+        margin-bottom: 8px;
+      }
+
+      .tab-btn {
+        padding: 10px 16px;
+        background-color: #222;
+        border: 1px solid #444;
+        color: #aaa;
+        cursor: pointer;
+        font-size: 14px;
+        border-radius: 4px 4px 0 0;
+      }
+
+      .tab-btn:hover {
+        background-color: #333;
+        color: lightblue;
+      }
+
+      .tab-btn.active {
+        background-color: #333;
+        color: lightgreen;
+        border-bottom-color: #333;
+      }
+
+      .tab-content {
+        display: none;
+        border: 1px solid #444;
+        padding: 16px;
+        background-color: #1a1a1a;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
       button {
         padding: 10px;
         margin-left: 5px;
         font-size: 16px;
+        cursor: pointer;
+        background-color: #222;
+        border: 1px solid #444;
+        color: lightblue;
+      }
+
+      button:hover {
+        background-color: #333;
+      }
+
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
       }
 
       pre {
         margin-top: 10px;
         white-space: pre-wrap;
-      }
-
-      #controls {
-        margin-bottom: 12px;
+        font-family: monospace;
       }
 
       #queryInput {
@@ -86,26 +138,209 @@
         color: #aaa;
         font-style: italic;
       }
+
+      .lesson-card {
+        border: 1px solid #444;
+        padding: 12px;
+        margin-bottom: 12px;
+        background-color: #111;
+      }
+
+      .lesson-title {
+        color: lightgreen;
+        font-size: 18px;
+        margin-bottom: 8px;
+      }
+
+      .lesson-theory {
+        color: #ccc;
+        margin-bottom: 12px;
+      }
+
+      .example-box {
+        background-color: #1a1a1a;
+        border-left: 3px solid lightgreen;
+        padding: 8px;
+        margin: 8px 0;
+      }
+
+      .exercise-box {
+        background-color: #0d1a0d;
+        border: 1px solid #2a4a2a;
+        padding: 12px;
+        margin: 12px 0;
+      }
+
+      .exercise-prompt {
+        color: #90ee90;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      .hint-box {
+        background-color: #1a1a0d;
+        border-left: 3px solid orange;
+        padding: 8px;
+        margin-top: 8px;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 20px;
+        background-color: #222;
+        border: 1px solid #444;
+        margin: 8px 0;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background-color: lightgreen;
+        transition: width 0.3s;
+      }
+
+      .progress-text {
+        text-align: center;
+        font-size: 12px;
+        margin-top: 4px;
+      }
+
+      .query-builder {
+        background-color: #111;
+        border: 1px solid #444;
+        padding: 12px;
+        margin-top: 12px;
+      }
+
+      .builder-step {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .builder-label {
+        width: 120px;
+        color: #aaa;
+      }
+
+      .builder-input {
+        flex: 1;
+        padding: 6px;
+        background-color: #1a1a1a;
+        border: 1px solid #444;
+        color: lightgreen;
+        font-family: monospace;
+      }
+
+      .controls-row {
+        margin-bottom: 12px;
+      }
     </style>
   </head>
 
   <body>
-    <div id="controls">
-      <button type="button" id="queryButton">🔍 Generate Queries</button>
-      <button type="button" id="procButton">⚙️ Generate Procedures</button>
-      <button type="button" id="runButton">▶️ Run SQL</button>
-      <button type="button" id="tablesButton">📋 Show Tables</button>
-      <button type="button" id="resetButton">🗑️ Reset Database</button>
+    <h1 style="margin-bottom: 16px; color: lightgreen;">SQL Lab</h1>
+
+    <div class="tab-container">
+      <div class="tab-buttons">
+        <button class="tab-btn active" data-tab="lessons">📚 Lessons</button>
+        <button class="tab-btn" data-tab="exercises">✏️ Exercises</button>
+        <button class="tab-btn" data-tab="sandbox">🏖️ SQL Sandbox</button>
+        <button class="tab-btn" data-tab="builder">🔧 Query Builder</button>
+      </div>
+
+      <!-- Lessons Tab -->
+      <div id="lessons" class="tab-content active">
+        <h2>SQL Lessons</h2>
+        <div id="lessonList"></div>
+        <div id="lessonContent" style="display: none;">
+          <button id="backToLessons">← Back to Lessons</button>
+          <div id="lessonDetail"></div>
+        </div>
+      </div>
+
+      <!-- Exercises Tab -->
+      <div id="exercises" class="tab-content">
+        <h2>Practice Exercises</h2>
+        <div class="progress-bar">
+          <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+        </div>
+        <p id="progressText" class="progress-text">0 / 0 exercises completed</p>
+        <div id="exerciseArea">
+          <div id="exercisePrompt"></div>
+          <textarea
+            id="exerciseInput"
+            placeholder="Write your SQL query here..."
+          ></textarea>
+          <div class="controls-row">
+            <button id="checkExercise">Check Answer</button>
+            <button id="getHint">Get Hint (<span id="hintsLeft">0</span> left)</button>
+            <button id="skipExercise">Skip</button>
+          </div>
+          <div id="exerciseFeedback"></div>
+        </div>
+        <div id="exerciseResult"></div>
+      </div>
+
+      <!-- SQL Sandbox Tab -->
+      <div id="sandbox" class="tab-content">
+        <h2>SQL Sandbox</h2>
+        <div class="controls-row">
+          <button type="button" id="runButton">▶️ Run SQL</button>
+          <button type="button" id="tablesButton">📋 Show Tables</button>
+          <button type="button" id="resetButton">🗑️ Reset Database</button>
+        </div>
+        <textarea
+          id="queryInput"
+          placeholder="Enter SQL here (e.g. CREATE TABLE, INSERT INTO, SELECT ...)"
+        ></textarea>
+        <div id="output"></div>
+      </div>
+
+      <!-- Query Builder Tab -->
+      <div id="builder" class="tab-content">
+        <h2>Query Builder</h2>
+        <p style="color: #aaa; margin-bottom: 12px;">
+          Build SQL queries step by step without memorizing syntax.
+        </p>
+        <div class="query-builder">
+          <div class="builder-step">
+            <label class="builder-label">Table Name:</label>
+            <input type="text" id="qbTable" class="builder-input" placeholder="e.g., customers" />
+          </div>
+          <div class="builder-step">
+            <label class="builder-label">Columns:</label>
+            <input type="text" id="qbColumns" class="builder-input" placeholder="e.g., name, email (leave empty for *)" />
+          </div>
+          <div class="builder-step">
+            <label class="builder-label">WHERE:</label>
+            <input type="text" id="qbWhere" class="builder-input" placeholder="e.g., price > 100" />
+          </div>
+          <div class="builder-step">
+            <label class="builder-label">ORDER BY:</label>
+            <input type="text" id="qbOrder" class="builder-input" placeholder="e.g., name ASC" />
+          </div>
+          <div class="builder-step">
+            <label class="builder-label">LIMIT:</label>
+            <input type="number" id="qbLimit" class="builder-input" placeholder="e.g., 10" />
+          </div>
+        </div>
+        <div class="controls-row" style="margin-top: 12px;">
+          <button id="buildQuery">Build Query</button>
+          <button id="runBuilderQuery">Run Query</button>
+          <button id="copyQuery">Copy Query</button>
+        </div>
+        <div id="builderOutput">
+          <h3>Generated SQL:</h3>
+          <pre id="builderSql"></pre>
+        </div>
+      </div>
     </div>
-    <textarea
-      id="queryInput"
-      placeholder="Enter SQL here (e.g. CREATE TABLE, INSERT INTO, SELECT ...)"
-    ></textarea>
-    <div id="output"></div>
 
     <script src="js/SQLDatabase.js" type="module"></script>
     <script src="js/SQLGenerator.js" type="module"></script>
+    <script src="js/SQLLesson.js" type="module"></script>
+    <script src="js/SQLExercise.js" type="module"></script>
+    <script src="js/SQLQueryBuilder.js" type="module"></script>
     <script src="index.js" type="module"></script>
-    <script src="index.test.js" type="module"></script>
   </body>
 </html>

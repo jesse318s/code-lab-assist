@@ -1,0 +1,48 @@
+<poml>
+  <role>Expert programming instructor teaching SQL database fundamentals</role>
+  <task>Create an interactive SQL Lab for practicing SQL queries and database operations. The lab should include educational content, interactive exercises, and a hands-on SQL sandbox using sql.js (SQLite compiled to WebAssembly).</task>
+  <output-format>
+    <section>
+      <h>Language:</h>
+      <p>JavaScript</p>
+    </section>
+
+    <section>
+      <h>Type (function, class, or interface):</h>
+      <p>classes for SQLQueryBuilder, SQLLesson, and SQLExercise modules</p>
+    </section>
+
+    <section>
+      <h>Name:</h>
+      <p>SQLLab</p>
+    </section>
+
+    <section>
+      <h>Description:</h>
+      <p>Create an interactive SQL learning lab that teaches SQL fundamentals through hands-on exercises. The lab should include a SQLQueryBuilder class that helps students construct SQL queries step-by-step with validation, an SQLLesson class that presents structured lessons on SQL concepts like SELECT, INSERT, UPDATE, DELETE, JOINs, and WHERE clauses, and an SQLExercise class that provides practice problems with automatic validation. The lab should use sql.js for an in-browser SQLite database experience, allowing students to run real SQL queries and see immediate results. The system should track progress through lessons and exercises, provide helpful hints when students get stuck, and include example queries that demonstrate proper SQL syntax. The query builder should guide users through selecting tables, columns, conditions, and ordering without requiring them to memorize syntax initially.</p>
+    </section>
+
+    <section>
+      <h>Parameters:</h>
+      <p>SQLQueryBuilder takes tableName (string) and columns (array of strings), SQLLesson takes lessonId (string) and content (object), SQLExercise takes exerciseId (string), prompt (string), and expectedResult (function)</p>
+    </section>
+  </output-format>
+  <examples>
+    <example chat="true" caption="Lesson Structure Example">
+      <input>Give me a lesson on SELECT statements</input>
+      <output>A lesson object with lessonId: "select-basics", title: "Introduction to SELECT", theory: "The SELECT statement...", examples: [...], exercises: [...], and hints: [...]</output>
+    </example>
+    <example chat="true" caption="Query Builder Example">
+      <input>Build a SELECT query for the employees table selecting name and salary</input>
+      <output>SELECT name, salary FROM employees;</output>
+    </example>
+    <example chat="true" caption="Exercise Validation Example">
+      <input>Check my query: SELECT * FROM products WHERE price > 10</input>
+      <output>Correct! Your query returns 5 rows. Moving to the next exercise...</output>
+    </example>
+  </examples>
+  <hint>The SQLQueryBuilder class should have methods like select(), from(), where(), orderBy(), limit(), and join() that chain together to build queries.</hint>
+  <hint>Use sql.js loaded from CDN for the in-browser SQLite database. Initialize it asynchronously and handle loading states.</hint>
+  <hint>Store lesson content and exercises as structured data that can be easily extended with new topics.</hint>
+  <hint>Implement query validation by comparing student queries against expected results using the same database.</hint>
+</poml>
