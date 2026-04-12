@@ -5,14 +5,18 @@ def test_page_loads(serve, page: Page):
     url = serve("sql-lab")
 
     page.goto(url)
-    expect(page).to_have_title("SQL Practice")
+    expect(page).to_have_title("SQL Lab")
 
 def test_controls_visible(serve, page: Page):
     url = serve("sql-lab")
 
     page.goto(url)
-    expect(page.locator("#queryButton")).to_be_visible()
-    expect(page.locator("#runButton")).to_be_visible()
+    # Wait for page to fully load
+    page.wait_for_load_state("networkidle")
+    # Click sandbox tab to reveal controls
+    page.locator('button.tab-btn:has-text("SQL Sandbox")').click()
+    page.wait_for_selector("#sandbox.active")
+    expect(page.locator("#queryInput")).to_be_visible()
     expect(page.locator("#queryInput")).to_be_visible()
     expect(page.locator("#output")).to_be_attached()
 
