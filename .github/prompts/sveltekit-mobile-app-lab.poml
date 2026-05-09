@@ -1,0 +1,220 @@
+<poml>
+  <!-- ── Template variables ── -->
+  <let name="appName">TaskFlow</let>
+  <let name="stack">SvelteKit 2 + Svelte 5 + Capacitor 8</let>
+  <let name="screens" value='[
+    { "route": "/", "name": "Dashboard", "description": "Task stats overview with a completion ring and a floating quick-add button" },
+    { "route": "/tasks", "name": "Task List", "description": "Filterable task list with swipe-to-complete gesture and animate:flip list transitions" },
+    { "route": "/tasks/[id]", "name": "Task Detail", "description": "Edit form for an individual task with a due-date picker and priority radio group" },
+    { "route": "/settings", "name": "Settings", "description": "Theme toggle via CSS custom properties, notification preferences, and JSON data export" }
+  ]'/>
+  <let name="components" value='[
+    { "name": "PriorityBadge", "file": "src/lib/components/PriorityBadge.svelte", "desc": "Reusable pill badge mapping priority enum to a color and icon — no dependencies, build this first" },
+    { "name": "TaskCard", "file": "src/lib/components/TaskCard.svelte", "desc": "Card with priority badge, completion checkbox, swipe-delete action, and haptic feedback on toggle" },
+    { "name": "TaskForm", "file": "src/lib/components/TaskForm.svelte", "desc": "Create/edit form with title, due-date input, and priority radio group; shared by add FAB and detail screen" },
+    { "name": "StatsRing", "file": "src/lib/components/StatsRing.svelte", "desc": "SVG circular progress ring showing task completion percentage with animated stroke-dashoffset" },
+    { "name": "BottomNav", "file": "src/lib/components/BottomNav.svelte", "desc": "Four-tab navigation bar that derives the active tab from $page.url.pathname with no props required" }
+  ]'/>
+  <let name="taskFields" value='[
+    { "field": "id",        "type": "string",                       "description": "UUID via crypto.randomUUID()" },
+    { "field": "title",     "type": "string",                       "description": "Required; max 120 characters" },
+    { "field": "completed", "type": "boolean",                      "description": "Completion state; default false" },
+    { "field": "priority",  "type": "'low' | 'medium' | 'high'",   "description": "Priority level; default 'medium'" },
+    { "field": "dueDate",   "type": "string | null",                "description": "ISO date string (YYYY-MM-DD) or null" },
+    { "field": "createdAt", "type": "number",                       "description": "Unix timestamp from Date.now()" },
+    { "field": "tags",      "type": "string[]",                     "description": "Optional tag strings for filtering" }
+  ]'/>
+
+  <!-- ── Role ── -->
+  <role>Expert programming instructor teaching SvelteKit mobile application development with Capacitor, specializing in Svelte 5 runes-based reactivity patterns and mobile-first CSS design using custom properties</role>
+
+  <!-- ── Task ── -->
+  <task>
+    Enhance the existing <b>sveltekit-mobile-app-lab</b> scaffold into a fully functional
+    <b>{{appName}}</b> mobile task-manager application using {{stack}}.
+    Replace the demo counter page with a real multi-screen app that demonstrates Svelte 5
+    runes-based reactivity, a persistent Svelte writable store backed by localStorage,
+    SvelteKit file-based routing across {{screens.length}} distinct screens, Capacitor native
+    device APIs, mobile-first CSS design via CSS custom properties, and Vitest unit tests.
+    <list>
+      <item>Define the <b>Task</b> data model and TypeScript types in <code inline="true">src/lib/types.ts</code></item>
+      <item>Build the <b>taskStore</b> with localStorage persistence and all CRUD action methods</item>
+      <item>Create all {{components.length}} reusable Svelte components in <code inline="true">src/lib/components/</code></item>
+      <item>Wire up all {{screens.length}} SvelteKit route screens, replacing the demo scaffold</item>
+      <item>Integrate Capacitor Haptics and LocalNotifications with browser-safe guards</item>
+      <item>Write Vitest unit tests for the store and TaskCard component</item>
+    </list>
+  </task>
+
+  <!-- ── Task Data Model ── -->
+  <cp caption="Task Data Model" captionStyle="header">
+    <table records="{{taskFields}}" columns='{{[
+      {"field":"field",       "header":"Field"},
+      {"field":"type",        "header":"TypeScript Type"},
+      {"field":"description", "header":"Description"}
+    ]}}'/>
+  </cp>
+
+  <!-- ── Output Format (Lab Template) ── -->
+  <output-format>
+    <section>
+      <h>Language:</h>
+      <p>TypeScript (SvelteKit 2 with Svelte 5 syntax)</p>
+    </section>
+
+    <section>
+      <h>Type (function, class, or interface):</h>
+      <p>Svelte components, a TypeScript store module, and a service module</p>
+    </section>
+
+    <section>
+      <h>Name:</h>
+      <p>{{appName}} — Enhanced SvelteKit Mobile App Lab</p>
+    </section>
+
+    <section>
+      <h>Description:</h>
+      <p>
+        Build <b>{{appName}}</b>, a complete mobile task-manager on top of the existing
+        sveltekit-mobile-app-lab scaffold. The application uses Svelte 5 runes ($state, $derived,
+        $effect) for component-local reactivity and a custom Svelte writable store backed by
+        localStorage for global task persistence across sessions. SvelteKit's file-based router
+        provides {{screens.length}} distinct screens navigated by a bottom navigation bar. The UI
+        is mobile-first with a card-based task layout, priority color-coding via CSS custom
+        properties, touch-friendly targets (minimum 44×44 px), and Svelte's built-in animate:flip
+        and transition:slide directives for smooth list animations. The Capacitor Haptics plugin
+        delivers tactile feedback on task completion, while LocalNotifications schedules due-date
+        reminders. Vitest unit tests cover the store's core actions and TaskCard rendering using
+        @testing-library/svelte.
+      </p>
+    </section>
+
+    <section>
+      <h>App Screens:</h>
+      <list listStyle="decimal">
+        <item for="screen in screens">
+          <b>{{screen.name}}</b> (<code inline="true">{{screen.route}}</code>) — {{screen.description}}
+        </item>
+      </list>
+    </section>
+
+    <section>
+      <h>Components to Build:</h>
+      <list listStyle="decimal">
+        <item for="component in components">
+          <b>{{component.name}}</b> (<i>{{component.file}}</i>) — {{component.desc}}
+        </item>
+      </list>
+    </section>
+
+    <section>
+      <h>Parameters:</h>
+      <p>
+        taskStore exposes tasks (Task[] writable store), addTask(title: string, dueDate: string | null,
+        priority: 'low' | 'medium' | 'high', tags?: string[]), updateTask(id: string, updates: Partial#lt;Task#gt;),
+        deleteTask(id: string), toggleComplete(id: string), clear() for test resets, and a derived
+        filteredTasks(filter: 'all' | 'pending' | 'completed', tag?: string) factory.
+        TaskCard uses $props() to accept task (Task) plus onToggle, onDelete, and onEdit callbacks.
+        TaskForm accepts initialTask (Task | null for edit mode) plus onSave and onCancel callbacks.
+        StatsRing accepts total (number) and completed (number).
+        PriorityBadge accepts priority ('low' | 'medium' | 'high').
+        BottomNav takes no props. NotificationService exposes scheduleReminder(taskId: string,
+        title: string, dueDate: string) and cancelReminder(taskId: string).
+      </p>
+    </section>
+  </output-format>
+
+  <!-- ── Build Order ── -->
+  <stepwise-instructions caption="Build Order">
+    <list>
+      <item>Define the <code inline="true">Task</code> interface and <code inline="true">Priority</code> union type in <code inline="true">src/lib/types.ts</code> — all other files import from here</item>
+      <item>Implement <code inline="true">src/lib/stores/taskStore.ts</code> with the full store factory, localStorage persistence, and all CRUD methods before building any UI</item>
+      <item>Create the <code inline="true">NotificationService</code> in <code inline="true">src/lib/services/notifications.ts</code> with Capacitor guards</item>
+      <item>Build components in dependency order: <b>PriorityBadge</b> first (no deps), then <b>TaskCard</b> (uses PriorityBadge), then <b>TaskForm</b>, <b>StatsRing</b>, and <b>BottomNav</b></item>
+      <item>Replace <code inline="true">src/routes/+layout.svelte</code> to embed BottomNav and declare all CSS custom property tokens</item>
+      <item>Build route pages in order: Dashboard, Task List, Task Detail, then Settings</item>
+      <item>Write Vitest tests for taskStore and TaskCard last, after all logic is stable</item>
+      <item>Run <code inline="true">npm run sync</code> to push the final build into the Android Capacitor project</item>
+    </list>
+  </stepwise-instructions>
+
+  <!-- ── Required File Structure ── -->
+  <cp caption="Required File Structure" captionStyle="header">
+    <list listStyle="dash">
+      <item><code inline="true">src/lib/types.ts</code> — Task interface, Priority union type, and FilterOption type</item>
+      <item><code inline="true">src/lib/stores/taskStore.ts</code> — Custom writable store with localStorage persistence</item>
+      <item><code inline="true">src/lib/services/notifications.ts</code> — Capacitor LocalNotifications wrapper</item>
+      <item for="component in components">
+        <code inline="true">{{component.file}}</code> — {{component.name}} component
+      </item>
+      <item><code inline="true">src/routes/+layout.svelte</code> — Root layout with BottomNav and CSS custom properties (replaces existing)</item>
+      <item><code inline="true">src/routes/+page.svelte</code> — Dashboard screen (replaces existing)</item>
+      <item><code inline="true">src/routes/tasks/+page.svelte</code> — Task List screen (new)</item>
+      <item><code inline="true">src/routes/tasks/[id]/+page.svelte</code> — Task Detail screen (new)</item>
+      <item><code inline="true">src/routes/tasks/[id]/+page.js</code> — Static load function passing route param (new)</item>
+      <item><code inline="true">src/routes/settings/+page.svelte</code> — Settings screen (new)</item>
+      <item><code inline="true">src/lib/stores/taskStore.test.ts</code> — Store unit tests</item>
+      <item><code inline="true">src/lib/components/TaskCard.test.ts</code> — Component unit tests</item>
+    </list>
+  </cp>
+
+  <!-- ── Constraints ── -->
+  <cp caption="Constraints" captionStyle="header">
+    <list listStyle="dash">
+      <item>Do <b>not</b> use Svelte 4 syntax (<code inline="true">export let</code>, <code inline="true">$:</code> reactive declarations, or <code inline="true">on:event</code> directives) — use Svelte 5 runes exclusively</item>
+      <item>Do <b>not</b> modify <code inline="true">package.json</code>, <code inline="true">svelte.config.js</code>, <code inline="true">vite.config.js</code>, or <code inline="true">capacitor.config.json</code></item>
+      <item>Do <b>not</b> use <code inline="true">require()</code> or <code inline="true">module.exports</code> — use ES module <code inline="true">import</code>/<code inline="true">export</code> throughout</item>
+      <item>Do <b>not</b> call Capacitor plugins directly from components — route all native calls through <code inline="true">notifications.ts</code> or a helper utility</item>
+      <item>Do <b>not</b> use <code inline="true">any</code> TypeScript types — define proper interfaces and union types</item>
+      <item>Do <b>not</b> use inline styles for colors or spacing — use CSS custom properties defined in the root layout</item>
+    </list>
+  </cp>
+
+  <!-- ── Examples ── -->
+  <examples chat="true" caption="Implementation Examples" captionStyle="header"
+            introducer="Here are key implementation patterns for this lab:">
+
+    <example caption="Svelte 5 Runes in TaskCard" captionStyle="bold">
+      <input>How do I use Svelte 5 runes for TaskCard's local interaction state?</input>
+      <output>Declare props with $props() and local UI state with $state(). Use $derived() for values computed from props: isSwipeActive and swipeOffset are $state variables that track a touch drag gesture, while priorityColor is a $derived value that maps task.priority to a CSS custom property — 'high' to var(--color-priority-high), 'medium' to var(--color-priority-medium), and 'low' to var(--color-priority-low). Avoid the old export let syntax for props; $props() is the Svelte 5 idiomatic replacement and allows default values via destructuring.</output>
+    </example>
+
+    <example caption="Custom Store with localStorage" captionStyle="bold">
+      <input>How should taskStore persist tasks across app restarts?</input>
+      <output>Create a store factory function that reads from localStorage on initialization and subscribes to write back on every change. Guard both the read and the subscriber with the browser import from $app/environment so the store works during SvelteKit's server-side prerendering. Return an object with subscribe plus named action methods (addTask, toggleComplete, deleteTask, updateTask, clear) that each call update() internally — keeping all mutations co-located with the store definition. For addTask, generate the id with crypto.randomUUID() and set createdAt to Date.now().</output>
+    </example>
+
+    <example caption="Capacitor Haptic Feedback" captionStyle="bold">
+      <input>How do I trigger haptic feedback when a task is marked complete inside TaskCard?</input>
+      <output>Import Haptics and ImpactStyle from @capacitor/haptics. In the onToggle handler inside TaskCard, call the store's toggleComplete action first, then wrap the Haptics.impact call in a try/catch block. Check Capacitor.isNativePlatform() before calling the plugin so it silently skips in the browser dev environment where the native bridge is unavailable. Use ImpactStyle.Medium for task completion and ImpactStyle.Heavy for task deletion to give each action a distinct tactile feel.</output>
+    </example>
+
+    <example caption="Vitest Unit Test for toggleComplete" captionStyle="bold">
+      <input>Write a unit test that verifies toggleComplete correctly flips a task's completed state</input>
+      <output>Import describe, it, expect, and beforeEach from vitest and get from svelte/store. In a beforeEach hook call taskStore.clear() to reset to an empty state. Add a task with taskStore.addTask('Test task', null, 'medium'), read its id from get(taskStore)[0].id, then call taskStore.toggleComplete(id) and assert get(taskStore)[0].completed is true. Call toggleComplete a second time and assert it is false again to confirm idempotency.</output>
+    </example>
+
+    <example caption="CSS Custom Properties for Theming" captionStyle="bold">
+      <input>How do I implement the dark/light theme toggle in the Settings screen?</input>
+      <output>Define all color tokens as CSS custom properties on :root in the root layout's style block. Add a [data-theme='dark'] selector that overrides those same tokens. In the Settings page, read the saved theme from localStorage on mount via $effect, set document.documentElement's data-theme attribute, and persist the user's choice back to localStorage. Expose a separate themeStore writable so the BottomNav icon tints and other components can reactively reflect the active theme without querying the DOM.</output>
+    </example>
+
+    <example caption="SvelteKit Data Loading for Task Detail" captionStyle="bold">
+      <input>How should the Task Detail page load its task data from the route parameter?</input>
+      <output>Create a +page.js (not +page.server.js — this is a static adapter build) alongside the detail page. Export a load function that receives params and returns { taskId: params.id }. In +page.svelte, destructure data from $props() using Svelte 5 syntax and use $derived to look up the task: const task = $derived(get(taskStore).find(t => t.id === data.taskId) ?? null). Show a "Task not found" message with a back-navigation link if task resolves to null.</output>
+    </example>
+
+  </examples>
+
+  <!-- ── Hints ── -->
+  <hint>Use the <code inline="true">browser</code> export from <code inline="true">$app/environment</code> to guard all localStorage and Capacitor calls — SvelteKit prerenders pages on the server where these browser-only APIs are unavailable.</hint>
+  <hint>Add <code inline="true">touch-action: manipulation</code> to every interactive element (buttons, task cards) to eliminate the 300 ms tap delay on Android WebView without disabling the native scroll behavior needed by the task list.</hint>
+  <hint>Use Svelte's <code inline="true">animate:flip</code> directive on the task list's keyed each block and <code inline="true">transition:slide</code> on newly inserted items to produce smooth, native-feeling list animations with no extra JavaScript.</hint>
+  <hint>The BottomNav component should import the <code inline="true">page</code> store from <code inline="true">$app/stores</code> and derive the active tab from <code inline="true">$page.url.pathname</code> — this keeps the component fully self-contained and removes the need for an activeRoute prop.</hint>
+  <hint>Define all design tokens (colors, spacing, border-radius, shadows) as CSS custom properties on <code inline="true">:root</code> in the root layout. The Settings screen toggles dark mode by setting <code inline="true">data-theme='dark'</code> on <code inline="true">document.documentElement</code>, triggering a CSS selector block that overrides those tokens — no JavaScript theme logic needed in any other component.</hint>
+  <hint>After every code change, run <code inline="true">npm run sync</code> (defined in package.json as a build-then-cap-sync sequence) to push the updated static build into the Android project before testing on a device or emulator.</hint>
+
+  <!-- ── Self-Check ── -->
+  <qa questionCaption="Pre-Submission Checklist" answerCaption="Verification">Does npm run build complete with zero TypeScript errors, do all Vitest tests pass with npm test, and does the app navigate correctly between all {{screens.length}} screens on a 375 px mobile viewport?</qa>
+
+</poml>
