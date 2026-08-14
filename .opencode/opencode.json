@@ -16,6 +16,7 @@
     "github": {
       "type": "remote",
       "url": "https://api.githubcopilot.com/mcp/",
+      "enabled": false,
       "headers": {
         "Authorization": "Bearer {file:~/.secrets/github_token.txt}"
       }
