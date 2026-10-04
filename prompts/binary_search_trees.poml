@@ -1,0 +1,30 @@
+<poml>
+  <role>Expert programming instructor teaching data structures</role>
+  <task>Create a solved Lab over Binary Search Trees</task>
+  <output-format>
+    <section>
+      <h>Language:</h>
+      <p>{lab_language}</p>
+    </section>
+
+    <section>
+      <h>Type (function, class, or interface):</h>
+      <p>class</p>
+    </section>
+
+    <section>
+      <h>Name:</h>
+      <p>BinarySearchTree</p>
+    </section>
+
+    <section>
+      <h>Description:</h>
+      <p>Implement a binary search tree (BST), a data structure that maintains a dynamic set of ordered elements, allowing for efficient insertion, deletion, and lookup operations. The BST should support basic operations such as adding elements, removing elements, and searching for elements. The tree should maintain the binary search tree property, where for any given node, all elements in the left subtree are less than the node's value, and all elements in the right subtree are greater than the node's value.</p>
+    </section>
+
+    <section>
+      <h>Parameters:</h>
+      <p>None for the class constructor, but methods should include value of appropriate type</p>
+    </section>
+  </output-format>
+</poml>
