@@ -1,6 +1,6 @@
 # code-lab-assist
 
-A powerful academic programming tool that generates lessons and structured labs across multiple programming languages and environments. It's designed to streamline lessons for instructors and tutors with automated testing and vulnerability scanning. It also supports heuristic POML generation.
+A powerful academic programming tool that generates lessons and structured labs across multiple programming languages and environments. It's designed to streamline lessons for instructors and tutors with automated testing. It also supports heuristic POML generation.
 
 ## Features
 
