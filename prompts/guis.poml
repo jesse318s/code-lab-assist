@@ -1,0 +1,30 @@
+<poml>
+  <role>Programming instructor teaching GUIs</role>
+  <task>Create a solved Lab over GUIs using the Lab Template format</task>
+  <output-format>
+    <section>
+      <h>Language:</h>
+      <p>{lab_language}</p>
+    </section>
+
+    <section>
+      <h>Type (function, class, or interface):</h>
+      <p>function</p>
+    </section>
+
+    <section>
+      <h>Name:</h>
+      <p>calculate</p>
+    </section>
+
+    <section>
+      <h>Description:</h>
+      <p>Create an application that has a "Calculate" button that computes values from user input</p>
+    </section>
+
+    <section>
+      <h>Parameters:</h>
+      <p>None</p>
+    </section>
+  </output-format>
+</poml>
