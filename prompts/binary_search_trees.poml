@@ -1,6 +1,6 @@
 <poml>
   <role>Expert programming instructor teaching data structures</role>
-  <task>Create a solved Lab over Binary Search Trees</task>
+  <task>Create a solved Lab over Binary Search Trees using the Lab Template format</task>
   <output-format>
     <section>
       <h>Language:</h>
