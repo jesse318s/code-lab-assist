@@ -62,7 +62,7 @@ This project uses the [brainscan](https://github.com/jesse318s/brainscan) reposi
 **To clone the repository with the submodule:**
 
 ```bash
-git clone --recurse-submodules https://github.com/jesse318s/brainscan.git
+git clone https://github.com/jesse318s/brainscan.git
 ```
 
 #### Running the Playwright-based Vulnerability Scan Tests
