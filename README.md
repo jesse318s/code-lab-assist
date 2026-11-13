@@ -15,7 +15,7 @@ A powerful academic programming tool that generates lessons and structured labs 
 
 ### Prerequisites
 
-- Python 3.6+
+- Python 3.11+
 - IDE support for Python, Jupyter notebooks, and GitHub Copilot (or an OpenCode installation instead of GitHub Copilot)
 - `requirements.txt` dependencies installed (`pip install -r requirements.txt`)
 - Language-specific compilers/interpreters for testing code
