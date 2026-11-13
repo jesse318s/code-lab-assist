@@ -7,6 +7,7 @@ public class AppTest {
         boolean testPassed = testHelloWorld();
         
         System.out.println(testPassed ? "PASS - Hello World test passed" : "FAIL - Hello World test failed");
+        System.exit(testPassed ? 0 : 1);
     }
     
     public static boolean testHelloWorld() {

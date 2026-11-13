@@ -5,7 +5,8 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
-		"sync": "npm run build && npx cap sync"
+		"sync": "npm run build && npx cap sync",
+		"android": "npx cap run android"
 	},
 	"devDependencies": {
 		"@capacitor/cli": "^8.2.0",

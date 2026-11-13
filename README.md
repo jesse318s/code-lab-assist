@@ -53,6 +53,44 @@ python poml_renderer.py
 - `prompt.poml` - The POML prompt file to render
 - `prompt_context.json` - Context variables (optional, uses empty context if not found)
 
+### Testing
+
+Each lab needs its own compiler/runtime installed, and `pip install -r requirements.txt` is assumed.
+
+```bash
+# Generator and POML unit tests
+python -m unittest test_code_lab_generation test_poml_renderer -v
+
+# Python lab
+python -m unittest python-lab/test_main.py -v
+
+# TypeScript lab (Jest)
+npm --prefix typescript-lab install && npm --prefix typescript-lab test
+
+# C# lab (xUnit)
+dotnet test csharp-lab/ConsoleApp1.Tests/ConsoleApp1.Tests.csproj
+
+# Java lab
+javac -d java-lab/bin java-lab/src/App.java java-lab/src/AppTest.java && java -cp java-lab/bin AppTest
+
+# SvelteKit mobile app lab (Vitest)
+cd sveltekit-mobile-app-lab && npm install && npx vitest run && cd ..
+
+# C / C++ labs (build and smoke-run; no existing assertions)
+# If using cmd, use c-lab\program.exe instead of ./c-lab/program.exe for compatibility
+gcc -Wall -std=c11 c-lab/main.c -o c-lab/program.exe && ./c-lab/program.exe
+# If using cmd, use cplusplus-lab\program.exe instead of ./cplusplus-lab/program.exe for compatibility
+g++ -Wall -std=c++11 cplusplus-lab/main.cpp -o cplusplus-lab/program.exe && ./cplusplus-lab/program.exe
+
+# Install the Playwright browser (once per machine)
+python -m playwright install chromium
+
+# JavaScript, SQL, and security tests (Playwright; some in-browser assertions for JavaScript and SQL must be checked in the browser console)
+python -m pytest playwright-tests -v
+```
+
+The security/BrainScan tests require the optional `brainscan` submodule.
+
 ### Browser Runtime Security Testing (BrainScan + Playwright)
 
 #### BrainScan Submodule Setup
@@ -82,4 +120,4 @@ If the trained snapshot file does not exist yet, generate it by running BrainSca
 cd brainscan && node index.js && cd ..
 ```
 
-This will create `brainscan/data/trained-network.json` (gitignored) for use by the tests. (It may need to be recreated if it causes false positives)
+This will create `brainscan/data/trained-network.json` (gitignored) for use by the tests. (It may need to be deleted and recreated if it causes false positives)
