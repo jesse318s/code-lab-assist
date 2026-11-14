@@ -36,8 +36,17 @@ def test_no_critical_vulns(serve, brain_snapshot, page: Page, lab_dir):
     page.wait_for_load_state("load")
 
     brain_script = page.add_script_tag(path=str(BRAIN_JS_PATH))
-    javascript = page.add_script_tag(content=javascript)
 
+    page.evaluate("() => { window.__labState = 'pending'; }")
+    page.add_script_tag(
+        content=javascript + "\n;window.__labState = 'done';",
+        type="module",
+    )
+    page.wait_for_function("window.__labState !== 'pending'", timeout=5000)
+
+    state = page.evaluate("window.__labState")
+
+    assert state == "done"
     brain_script.evaluate("el => el.setAttribute('data-injected', 'brainscan')")
 
     result = page.evaluate("""
