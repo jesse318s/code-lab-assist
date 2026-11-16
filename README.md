@@ -95,7 +95,7 @@ The security/BrainScan tests require the optional `brainscan` submodule.
 
 #### BrainScan Submodule Setup
 
-This project uses the [brainscan](https://github.com/jesse318s/brainscan) repository as a git submodule for browser-based vulnerability scanning.
+This project uses the [brainscan](https://github.com/jesse318s/brainscan) repository as a git submodule for browser-based vulnerability scanning, but it is not treated as a strict git submodule and is gitignored.
 
 **To clone the repository with the submodule:**
 
