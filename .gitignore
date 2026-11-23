@@ -16,4 +16,6 @@ csharp-lab/*/obj/
 prompt.poml
 prompt_context.json
 
+/forensics/cases/
+
 /brainscan

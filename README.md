@@ -8,6 +8,7 @@ A powerful academic programming tool that generates lessons and structured labs 
 - **Versatile Code Templates**: Generate functions, classes, and interfaces with appropriate language-specific syntax
 - **Automated Testing**: Generate comprehensive test suites for all supported languages and environments
 - **Vulnerability Scanning**: Playwright tests can run BrainScan directly in the browser runtime to detect risky patterns in all lab code
+- **Forensic BrainScan Triage**: Capture read-only evidence copies with SHA-256 hashes and a chain-of-custody log before analyzing them offline
 - **User-Friendly Interface**: Interactive Jupyter notebook interface for easy lab creation
 - **Heuristic POML Generation**: Generate powerful and intuitive POML prompts for any purpose
 
@@ -121,3 +122,19 @@ cd brainscan && node index.js && cd ..
 ```
 
 This will create `brainscan/data/trained-network.json` (gitignored) for use by the tests. (It may need to be deleted and recreated if it causes false positives)
+
+### Forensic BrainScan Triage
+
+The Playwright test above is a security regression check. The `forensics` module reuses the same scanner for a forensic-style workflow: it acquires read-only copies of artifacts, records SHA-256 hashes and acquisition times, logs a chain of custody, and analyzes only the stored copies with the trained snapshot. No browser page is mutated and the BrainScan server is not started.
+
+```bash
+python -m forensics.cli --case-id INC-2026-001 --examiner "Your Name" javascript-lab/index.js sql-lab/index.js
+```
+
+Each run writes a new directory under `forensics/cases/INC-2026-001/` containing:
+
+- `evidence/` - byte-for-byte copies named by their SHA-256 hash
+- `case.json` and `case.json.sha256` - evidence inventory and chain of custody with a verification hash
+- `analysis.json` and `analysis.json.sha256` - BrainScan feature flags, risk score, and the snapshot hash used
+
+Existing case IDs are rejected so prior evidence is not overwritten. Use a new case ID for each acquisition. This is forensic-grade triage for development and teaching; court-admissible forensics would additionally require signed manifests, controlled storage, and a documented acquisition procedure.
