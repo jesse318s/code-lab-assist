@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 CASE_ID_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$")
+TOOL_VERSION = "1.1.0"
 
 
 def utc_now_iso() -> str:
@@ -39,6 +40,11 @@ def validate_case_id(case_id: str) -> str:
     if not CASE_ID_PATTERN.fullmatch(case_id): raise ValueError("case_id may only contain letters, numbers, dot, underscore, and hyphen")
 
     return case_id
+
+
+def canonical_json_bytes(payload: dict) -> bytes:
+    """Return deterministic UTF-8 JSON bytes for hashing or signing."""
+    return (json.dumps(payload, indent=2, sort_keys=True) + "\n").encode("utf-8")
 
 
 def write_json_with_hash(path: Path, payload: dict) -> tuple[Path, Path]:

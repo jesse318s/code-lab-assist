@@ -134,7 +134,16 @@ python -m forensics.cli --case-id INC-2026-001 --examiner "Your Name" javascript
 Each run writes a new directory under `forensics/cases/INC-2026-001/` containing:
 
 - `evidence/` - byte-for-byte copies named by their SHA-256 hash
-- `case.json` and `case.json.sha256` - evidence inventory and chain of custody with a verification hash
+- `case.json` and `case.json.sha256` - HMAC-sealed manifest with examiner, tool version, command line, evidence inventory, and hash algorithm
+- `custody.jsonl` - append-only custody events linked by a rolling SHA-256 hash chain
 - `analysis.json` and `analysis.json.sha256` - BrainScan feature flags, risk score, and the snapshot hash used
+- `dfir_report.json` and `dfir_report.json.sha256` - findings by severity, triggered indicators, response actions, and playbooks
+- `iocs.json` and `iocs.json.sha256` - compact code-pattern indicators
 
-Existing case IDs are rejected so prior evidence is not overwritten. Use a new case ID for each acquisition. This is forensic-grade triage for development and teaching; court-admissible forensics would additionally require signed manifests, controlled storage, and a documented acquisition procedure.
+The HMAC key defaults to `forensics/case-signing.key` (gitignored) or `FORENSICS_SIGNING_KEY`; use `--signing-key` to supply your own. Existing case IDs are rejected so prior evidence is not overwritten. Verify a case at any time with:
+
+```bash
+python -m forensics.cli --verify forensics/cases/INC-2026-001
+```
+
+Verification re-hashes evidence and reports, checks the manifest signature and custody chain, logs its own run, and exits non-zero on any problem. This is DFIR-ready for development and teaching; court-admissible forensics would additionally require asymmetric signatures, controlled storage, and a documented acquisition procedure.

@@ -4,6 +4,7 @@ from pathlib import Path
 import subprocess
 from typing import Any
 
+from .dfir import build_findings, write_dfir_report, write_ioc_export
 from .evidence import ForensicCase
 from .utils import sha256_file, utc_now_iso, write_json_with_hash
 
@@ -101,5 +102,7 @@ class BrainScanAnalyzer:
             "results": results,
         }
         report_path, _ = write_json_with_hash(case.output_dir / "analysis.json", report)
+        write_dfir_report(case, results, snapshot_hash)
+        write_ioc_export(case, build_findings(results))
 
         return report_path

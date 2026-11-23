@@ -4,6 +4,8 @@ import mimetypes
 from pathlib import Path
 from typing import Any
 
+from .custody import append_event
+from .signing import seal_manifest
 from .utils import sha256_bytes, sha256_file, utc_now_iso, validate_case_id, write_json_with_hash
 
 
@@ -41,19 +43,24 @@ class ForensicCase:
 
     Args:
         case_id: Unique identifier used as the case directory name.
-        output_dir: Parent directory for the case; relative paths use workspace_root.
+        output_dir: Parent directory for cases; the case ID is appended.
         examiner: Person or tool performing the acquisition.
         workspace_root: Root used to resolve relative source and output paths.
+        incident_type: Short classification such as suspicious-code or malware.
         notes: Optional free-text case notes.
     """
 
-    def __init__(self, case_id: str, output_dir: Path, examiner: str, workspace_root: Path, notes: str = ""):
+    def __init__(self, case_id: str, output_dir: Path, examiner: str, workspace_root: Path, incident_type: str = "suspicious-code", notes: str = ""):
         self.case_id = validate_case_id(case_id)
         self.examiner = examiner
+        self.incident_type = incident_type
         self.notes = notes
         self.workspace_root = workspace_root.resolve()
-        self.output_dir = (output_dir if output_dir.is_absolute() else workspace_root / output_dir).resolve()
+        case_root = output_dir if output_dir.is_absolute() else workspace_root / output_dir
+
+        self.output_dir = (case_root / self.case_id).resolve()
         self.manifest_path = self.output_dir / "case.json"
+        self.custody_log_path = self.output_dir / "custody.jsonl"
 
         if self.manifest_path.exists(): raise ForensicCaseError(f"Case '{case_id}' already exists at {self.output_dir}")
 
@@ -121,12 +128,14 @@ class ForensicCase:
         )
 
         self.chain_of_custody.append(event)
+        append_event(self.output_dir, action, actor, details, evidence_sha256)
 
-    def write_manifest(self) -> tuple[Path, Path]:
+    def write_manifest(self, signing_key: bytes | None = None, command_line: str = "") -> tuple[Path, Path]:
         """Write the case manifest and its hash file.
 
-        Returns:
-            Paths to the manifest and its .sha256 verification file.
+        Args:
+            signing_key: Optional HMAC key used to seal the manifest.
+            command_line: Command used for this acquisition, recorded as provenance.
         """
         # Logged here so every finalized case has a final, timestamped custody entry.
         self.add_event("manifest_written", actor="forensics-cli", details={"schema_version": "1.0"})
@@ -135,11 +144,15 @@ class ForensicCase:
             "schema_version": "1.0",
             "case_id": self.case_id,
             "examiner": self.examiner,
+            "incident_type": self.incident_type,
             "notes": self.notes,
             "created_at_utc": self.created_at_utc,
             "workspace_root": str(self.workspace_root),
+            "custody_log": self.custody_log_path.name,
             "evidence": [asdict(record) for record in self.evidence],
             "chain_of_custody": [asdict(event) for event in self.chain_of_custody],
         }
+
+        if signing_key is not None: manifest = seal_manifest(manifest, signing_key, self.examiner, command_line)
 
         return write_json_with_hash(self.manifest_path, manifest)
