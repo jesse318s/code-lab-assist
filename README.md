@@ -20,7 +20,7 @@ A powerful academic programming tool that generates lessons and structured labs 
 - IDE support for Python, Jupyter notebooks, and GitHub Copilot (or an OpenCode installation instead of GitHub Copilot)
 - `requirements.txt` dependencies installed (`pip install -r requirements.txt`)
 - Language-specific compilers/interpreters for testing code
-- A web browser, internet connection, and way to serve websites locally for the SQL Lab (e.g., Live Server extension in VS Code)
+- A web browser and way to serve websites locally for the SQL Lab (e.g., Live Server extension for VS Code)
 - Git access to the [brainscan](https://github.com/jesse318s/brainscan) repository (required for vulnerability scanning)
 
 ### Usage
