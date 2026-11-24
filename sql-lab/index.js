@@ -21,11 +21,11 @@ const defaultConfig = {
  */
 const loadConfig = async () => {
   try {
-    const response = await fetch("./sql-lab-config.json");
+    const { default: loadedConfig } = await import("./sql-lab-config.json", {
+      with: { type: "json" },
+    });
 
-    if (!response.ok) return defaultConfig;
-
-    return await response.json();
+    return loadedConfig;
   } catch {
     return defaultConfig;
   }
@@ -103,7 +103,7 @@ await database.init();
 console.log("SQL database initialized.");
 
 document.getElementById("queryButton").addEventListener("click", () => {
-  output.innerHTML = "";
+  output.replaceChildren();
 
   const qCfg = config.query;
   const queries = generator.generateSelectQueries(qCfg.idValues, qCfg.whereCol);
@@ -115,7 +115,7 @@ document.getElementById("queryButton").addEventListener("click", () => {
 });
 
 document.getElementById("procButton").addEventListener("click", () => {
-  output.innerHTML = "";
+  output.replaceChildren();
 
   const pCfg = config.proc;
   const proc = generator.generateUpdateProc(
@@ -135,7 +135,7 @@ document.getElementById("procButton").addEventListener("click", () => {
 });
 
 document.getElementById("runButton").addEventListener("click", () => {
-  output.innerHTML = "";
+  output.replaceChildren();
 
   const sql = queryInput.value.trim();
 
@@ -173,7 +173,7 @@ document.getElementById("runButton").addEventListener("click", () => {
 });
 
 document.getElementById("tablesButton").addEventListener("click", () => {
-  output.innerHTML = "";
+  output.replaceChildren();
 
   try {
     const tables = database.listTables();
@@ -212,7 +212,7 @@ document.getElementById("tablesButton").addEventListener("click", () => {
 });
 
 document.getElementById("resetButton").addEventListener("click", async () => {
-  output.innerHTML = "";
+  output.replaceChildren();
 
   try {
     await database.reset();

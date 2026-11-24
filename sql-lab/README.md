@@ -4,7 +4,7 @@ The `sql-lab/` directory provides a browser-based SQL playground with two main c
 
 **Opening the lab:**
 
-Open `sql-lab/index.html` in a browser. The page loads sql.js (SQLite compiled to WebAssembly) from a CDN, so an internet connection is needed on first load.
+Open `sql-lab/index.html` in a browser. The page loads a locally vendored copy of sql.js (SQLite compiled to WebAssembly).
 
 **UI Controls:**
 

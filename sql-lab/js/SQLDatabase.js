@@ -35,8 +35,8 @@ class SQLDatabase {
   }
 
   /**
-   * Loads the sql.js library from CDN. Caches the promise so the
-   * library is only fetched once per page session.
+   * Loads the locally vendored sql.js library. Caches the promise so the
+   * library is only loaded once per page session.
    *
    * @returns {Promise<object>} The initialized sql.js module
    */
@@ -44,8 +44,7 @@ class SQLDatabase {
     if (this._sqlPromise) return this._sqlPromise;
 
     this._sqlPromise = initSqlJs({
-      locateFile: (file) =>
-        `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.11.0/${file}`,
+      locateFile: (file) => `js/vendor/${file}`,
     });
 
     return this._sqlPromise;
